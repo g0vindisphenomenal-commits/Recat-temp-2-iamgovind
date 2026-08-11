@@ -2,6 +2,7 @@ import {
   ArrowRight,
   Bot,
   Compass,
+  Globe,
   Layers,
   LineChart,
   Sparkles,
@@ -29,9 +30,23 @@ type Project = {
   imageRatio: number;
   image: string;
   imageAlt: string;
+  href?: string;
 };
 
 const PROJECTS: Project[] = [
+  {
+    id: "rijasrazak",
+    icon: Globe,
+    iconLabel: "Rijasrazak.com",
+    title: "Portfolio Website for a Digital Marketer",
+    description:
+      "Designed and developed a professional portfolio website for a digital marketer based in Thrissur. The project focused on creating a clean, modern layout that effectively showcases services, expertise, and previous work. Emphasis was placed on user experience, responsive design, and clear call-to-actions to support personal branding and lead generation.",
+    meta: "Designer & Developer, 2026",
+    imageRatio: 1024 / 768,
+    image: "/rijasrazak.png",
+    imageAlt: "Rijasrazak.com website mockup",
+    href: "https://rijasrazak.com/",
+  },
   {
     id: "loom",
     icon: Sparkles,
@@ -174,50 +189,66 @@ function ProjectCard({
   index: number;
 }): ReactNode {
   const Icon = project.icon;
+
+  const cardContent = (
+    <article className="project-card flex h-full cursor-pointer flex-col gap-4 rounded-3xl border border-foreground/8 bg-background p-3 sm:p-3.5">
+      <header className="flex items-center gap-2.5 px-1 pt-2">
+        <span className="border-foreground/10 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border bg-background">
+          <Icon className="h-3.5 w-3.5 text-foreground" aria-hidden="true" />
+        </span>
+        <span className="text-sm font-medium tracking-tight text-foreground">
+          {project.iconLabel}
+        </span>
+      </header>
+
+      <div
+        className="project-card__image ring-foreground/5 relative w-full overflow-hidden rounded-2xl bg-foreground/5 ring-1"
+        style={{ aspectRatio: project.imageRatio }}
+      >
+        <div className="project-card__image-inner">
+          <Image
+            src={project.image}
+            alt={project.imageAlt}
+            fill
+            sizes="(min-width: 1024px) 540px, (min-width: 768px) 45vw, 100vw"
+            className="object-cover"
+            priority={index < 2}
+          />
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-2.5 px-1 pb-1">
+        <h3 className="text-[20px] font-medium leading-[1.2] tracking-tight text-foreground sm:text-[22px]">
+          {project.title}
+        </h3>
+        <p className="text-[14px] leading-normal tracking-tight text-foreground/65 sm:text-[15px]">
+          {project.description}
+        </p>
+      </div>
+
+      <p className="px-1 pb-2 text-[12px] tracking-tight text-foreground/50">
+        {project.meta}
+      </p>
+    </article>
+  );
+
   return (
     <FadeIn
       delay={Math.min(index * 0.06, 0.3)}
       className="mb-6 break-inside-avoid md:mb-7"
     >
-      <article className="project-card flex cursor-pointer flex-col gap-4 rounded-3xl border border-foreground/8 bg-background p-3 sm:p-3.5">
-        <header className="flex items-center gap-2.5 px-1 pt-2">
-          <span className="border-foreground/10 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border bg-background">
-            <Icon className="h-3.5 w-3.5 text-foreground" aria-hidden="true" />
-          </span>
-          <span className="text-sm font-medium tracking-tight text-foreground">
-            {project.iconLabel}
-          </span>
-        </header>
-
-        <div
-          className="project-card__image ring-foreground/5 relative w-full overflow-hidden rounded-2xl bg-foreground/5 ring-1"
-          style={{ aspectRatio: project.imageRatio }}
+      {project.href ? (
+        <Link
+          href={project.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block outline-none"
         >
-          <div className="project-card__image-inner">
-            <Image
-              src={project.image}
-              alt={project.imageAlt}
-              fill
-              sizes="(min-width: 1024px) 540px, (min-width: 768px) 45vw, 100vw"
-              className="object-cover"
-              priority={index < 2}
-            />
-          </div>
-        </div>
-
-        <div className="flex flex-col gap-2.5 px-1 pb-1">
-          <h3 className="text-[20px] font-medium leading-[1.2] tracking-tight text-foreground sm:text-[22px]">
-            {project.title}
-          </h3>
-          <p className="text-[14px] leading-normal tracking-tight text-foreground/65 sm:text-[15px]">
-            {project.description}
-          </p>
-        </div>
-
-        <p className="px-1 pb-2 text-[12px] tracking-tight text-foreground/50">
-          {project.meta}
-        </p>
-      </article>
+          {cardContent}
+        </Link>
+      ) : (
+        cardContent
+      )}
     </FadeIn>
   );
 }
