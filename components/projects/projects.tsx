@@ -38,9 +38,9 @@ const PROJECTS: Project[] = [
     id: "rijasrazak",
     icon: Globe,
     iconLabel: "Rijasrazak.com",
-    title: "Portfolio Website for a Digital Marketer",
+    title: "Portfolio Website for a Digital Marketer & Influencer",
     description:
-      "Designed and developed a professional portfolio website for a digital marketer based in Thrissur. The project focused on creating a clean, modern layout that effectively showcases services, expertise, and previous work. Emphasis was placed on user experience, responsive design, and clear call-to-actions to support personal branding and lead generation.",
+      "Designed and developed a professional portfolio website for a digital marketer and social media influencer based in Thrissur. The project focused on creating a clean, modern layout that effectively showcases services, influencer brand deals, expertise, and content creation. Emphasis was placed on user experience, responsive design, and clear call-to-actions to support personal branding and audience engagement.",
     meta: "Designer & Developer, 2026",
     imageRatio: 1024 / 768,
     image: "/rijasrazak.png",
