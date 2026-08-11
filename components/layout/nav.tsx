@@ -50,10 +50,15 @@ function NavThemeToggle(): ReactNode {
       typeof document !== "undefined" &&
       typeof document.startViewTransition === "function";
 
-    if (!supportsViewTransitions || prefersReducedMotion) {
+    const isMobile =
+      typeof window !== "undefined" &&
+      (window.innerWidth < 768 || window.matchMedia("(max-width: 767px)").matches);
+
+    if (!supportsViewTransitions || prefersReducedMotion || isMobile) {
       setTheme(next);
       return;
     }
+
 
     const rect = event.currentTarget.getBoundingClientRect();
     const cx = rect.left + rect.width / 2;

@@ -112,11 +112,12 @@ html[data-theme-anim="1"]::view-transition-new(root) {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
+@media (max-width: 767px), (prefers-reduced-motion: reduce) {
   html[data-theme-anim="1"]::view-transition-new(root) {
     animation: none;
   }
 }
+
 
 .site-frame {
   display: block;
