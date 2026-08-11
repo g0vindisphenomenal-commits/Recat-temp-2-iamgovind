@@ -217,3 +217,23 @@ html[data-theme-anim="1"]::view-transition-new(root) {
 .project-card:hover .project-card__image-inner {
   transform: scale(1.06);
 }
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 25s linear infinite;
+}
+
+.animate-marquee-hover-pause:hover .animate-marquee {
+  animation-play-state: paused;
+}
+

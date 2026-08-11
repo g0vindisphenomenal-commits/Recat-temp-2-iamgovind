@@ -1,3 +1,4 @@
+import { MarqueeStack } from "@/components/about/marquee-stack";
 import { ContactCard } from "@/components/contact/contact-card";
 import { Hero } from "@/components/hero/hero";
 import { Projects } from "@/components/projects/projects";
@@ -15,6 +16,9 @@ export default function HomePage(): ReactNode {
   return (
     <main id="main-content" className="flex flex-1 flex-col gap-20 sm:gap-28">
       <Hero />
+      <section className="mx-auto w-full max-w-275 px-6 sm:px-10">
+        <MarqueeStack />
+      </section>
       <Projects withHeadline viewMoreVisible />
       <ContactCard />
       <div className="h-12 sm:h-16" />

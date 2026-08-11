@@ -12,22 +12,24 @@ type Chip = {
 };
 
 const CHIPS: Chip[] = [
-  {
-    label: "Figma",
-    slug: "figma",
-    bg: "#1f1f1f",
-    fg: "#ffffff",
-    iconUrl: "https://svgl.app/library/figma.svg",
-  },
   { label: "React", slug: "react", bg: "#1FB6CB", fg: "#ffffff" },
   { label: "Next.js", slug: "nextdotjs", bg: "#1f1f1f", fg: "#ffffff" },
+  { label: "Spotify", slug: "spotify", bg: "#1DB954", fg: "#ffffff" },
   { label: "TypeScript", slug: "typescript", bg: "#2F74C0", fg: "#ffffff" },
   { label: "shadcn/ui", slug: "shadcnui", bg: "#5b54ff", fg: "#ffffff" },
   { label: "Cursor", slug: "cursor", bg: "#111111", fg: "#ffffff" },
-  { label: "GSAP", slug: "gsap", bg: "#0AE448", fg: "#0a0a0a" },
   { label: "GitHub", slug: "github", bg: "#181717", fg: "#ffffff" },
   { label: "Vercel", slug: "vercel", bg: "#0a0a0a", fg: "#ffffff" },
+  { label: "Google Ads", slug: "googleads", bg: "#4285F4", fg: "#ffffff" },
+  { label: "WordPress", slug: "wordpress", bg: "#21759B", fg: "#ffffff" },
   { label: "Tailwind CSS", slug: "tailwindcss", bg: "#2BBCF5", fg: "#ffffff" },
+  { label: "WooCommerce", slug: "woocommerce", bg: "#96588A", fg: "#ffffff" },
+  { label: "Python", slug: "python", bg: "#3776AB", fg: "#ffffff" },
+  { label: "Meta", slug: "meta", bg: "#0668E1", fg: "#ffffff" },
+  { label: "Shopify", slug: "shopify", bg: "#96BF48", fg: "#ffffff" },
+  { label: "Business Profile", slug: "googlemaps", bg: "#4285F4", fg: "#ffffff" },
+  { label: "LinkedIn", slug: "linkedin", bg: "#0A66C2", fg: "#ffffff", iconUrl: "/linkedin.svg" },
+  { label: "Angular", slug: "angular", bg: "#DD0031", fg: "#ffffff" },
 ];
 
 const CHIP_RADIUS = 14;
@@ -80,7 +82,7 @@ export function Stack(): ReactNode {
       let height = container.clientHeight;
 
       const engine = Engine.create();
-      engine.gravity.y = 1;
+      engine.gravity.y = 1; // Falling physics
       const world = engine.world;
 
       const wallThickness = 400;
@@ -214,11 +216,11 @@ export function Stack(): ReactNode {
     <div className="flex flex-col gap-3">
       <div className="flex items-center gap-3">
         <h3 className="text-foreground text-[15px] font-semibold tracking-tight">
-          Stack
+          What I do
         </h3>
       </div>
 
-      <div className="border-foreground/5 bg-foreground/2 dark:bg-foreground/5 relative h-40 overflow-hidden rounded-4xl border sm:h-64">
+      <div className="border-foreground/5 bg-foreground/2 dark:bg-foreground/5 relative h-40 overflow-hidden rounded-4xl border sm:h-64 cursor-grab select-none">
         <button
           type="button"
           onClick={() => setResetKey((k) => k + 1)}
@@ -244,7 +246,7 @@ export function Stack(): ReactNode {
 
         <div
           ref={containerRef}
-          className="absolute inset-0 cursor-grab select-none"
+          className="absolute inset-0"
           style={{ touchAction: "none" }}
         >
           {CHIPS.map((chip, i) => (
@@ -269,7 +271,7 @@ export function Stack(): ReactNode {
 function ChipPill({ chip }: { chip: Chip }): ReactNode {
   return (
     <div
-      className="dark:ring-1 dark:ring-white/15 inline-flex items-center gap-2 p-1 pr-2 text-[15px] font-medium tracking-tight sm:text-[16px]"
+      className="dark:ring-1 dark:ring-white/15 inline-flex items-center gap-2 p-1 pr-3 text-[15px] font-medium tracking-tight sm:text-[16px] shrink-0"
       style={{
         backgroundColor: chip.bg,
         color: chip.fg,

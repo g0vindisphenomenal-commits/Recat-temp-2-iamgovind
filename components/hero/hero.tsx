@@ -18,19 +18,19 @@ export function Hero(): ReactNode {
               <span aria-hidden="true" className="mx-0.5">
                 👋
               </span>
-              , I&rsquo;m Josh
+              , I&rsquo;m Govind
             </p>
 
             <h1 className="text-[2.75rem] font-medium leading-[1.05] tracking-tight text-foreground md:text-[2.5rem] lg:text-[3.65rem]">
-              <span className="block whitespace-nowrap">
-                Design engineer &
+              <span className="block">
+                Digital marketer &
               </span>
-              <span className="block whitespace-nowrap">AI enthusiast</span>
+              <span className="block">web developer</span>
             </h1>
 
             <p className="max-w-[34ch] text-[22px] leading-[1.4] tracking-tight text-foreground/65">
-              Independent engineer focused on interfaces that feel calm,
-              considered, and quietly fast.
+              Independent specialist focused on growth strategies and digital
+              platforms that feel calm, considered, and quietly fast.
             </p>
 
             <HeroCtas />
