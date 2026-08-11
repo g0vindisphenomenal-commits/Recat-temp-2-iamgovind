@@ -20,15 +20,18 @@ const MEMBERS: Member[] = [
     href: "https://portfolio-rahul-29.web.app/",
     initials: "R",
     color: "#2563EB",
+    avatarUrl: "/rahul.png",
   },
+
   {
     name: "Sathya Narayanan",
-    role: "Collaborator & Specialist",
+    role: "Growth Marketer",
     href: "https://sathyanarayanan.co/",
     initials: "S",
     color: "#EA580C",
     avatarUrl: "/sathya.png",
   },
+
   {
     name: "Sooraj Paranthaman",
     role: "Collaborator & Specialist",
@@ -45,6 +48,15 @@ const MEMBERS: Member[] = [
     color: "#7C3AED",
     avatarUrl: "/akhil.png",
   },
+  {
+    name: "Gurudharman",
+    role: "Collaborator & Specialist",
+    href: "https://gurudharman.com/",
+    initials: "G",
+    color: "#059669",
+    avatarUrl: "/guru.png",
+  },
+
 ];
 
 export function Team(): ReactNode {

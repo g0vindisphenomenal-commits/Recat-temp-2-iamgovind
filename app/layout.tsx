@@ -2,7 +2,7 @@ import { Nav } from "@/components/layout/nav";
 import { PageBackdrop } from "@/components/layout/page-backdrop";
 import { Providers } from "@/components/layout/providers";
 import { SkipToContent } from "@/components/layout/skip-to-content";
-import { baseMetadata } from "@/lib/metadata";
+import { baseMetadata, siteConfig } from "@/lib/metadata";
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Geist, Geist_Mono } from "next/font/google";
 import type { ReactNode } from "react";
@@ -39,6 +39,41 @@ export const viewport: Viewport = {
   maximumScale: 5,
 };
 
+const jsonLdData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": `${siteConfig.url}/#person`,
+      name: "Govind B",
+      jobTitle: "Digital Marketer & Full-Stack Web Developer",
+      url: siteConfig.url,
+      image: `${siteConfig.url}/rahul.png`,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Trivandrum",
+        addressRegion: "Kerala",
+        addressCountry: "India",
+      },
+      sameAs: [
+        "https://www.linkedin.com/in/iamgovind-digital-marketing-expert-in-kerala-trivandrum/",
+        "https://www.facebook.com/iamg0vind/",
+        "https://www.instagram.com/iamg0vind/",
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteConfig.url}/#website`,
+      url: siteConfig.url,
+      name: siteConfig.name,
+      description: siteConfig.description,
+      publisher: {
+        "@id": `${siteConfig.url}/#person`,
+      },
+    },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -46,6 +81,18 @@ export default function RootLayout({
 }>): ReactNode {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          href={`${siteConfig.url}/feed.xml`}
+          title={`${siteConfig.name} - RSS Feed`}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} min-h-screen bg-background font-sans text-foreground antialiased`}
       >

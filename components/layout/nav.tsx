@@ -156,6 +156,8 @@ export function Nav(): ReactNode {
       className="fixed left-1/2 top-6 z-50 -translate-x-1/2"
     >
       <div className="flex items-center gap-1 rounded-full bg-background p-1.5 shadow-sm border border-foreground/8">
+
+
         <ul ref={listRef} className="relative flex items-center gap-1">
           {pillRect && (
             <motion.span

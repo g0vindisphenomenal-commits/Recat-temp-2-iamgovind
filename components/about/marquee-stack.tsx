@@ -16,7 +16,6 @@ const CHIPS: Chip[] = [
   { label: "Next.js", slug: "nextdotjs", bg: "#1f1f1f", fg: "#ffffff" },
   { label: "Spotify", slug: "spotify", bg: "#1DB954", fg: "#ffffff" },
   { label: "TypeScript", slug: "typescript", bg: "#2F74C0", fg: "#ffffff" },
-  { label: "shadcn/ui", slug: "shadcnui", bg: "#5b54ff", fg: "#ffffff" },
   { label: "Cursor", slug: "cursor", bg: "#111111", fg: "#ffffff" },
   { label: "GitHub", slug: "github", bg: "#181717", fg: "#ffffff" },
   { label: "Vercel", slug: "vercel", bg: "#0a0a0a", fg: "#ffffff" },
@@ -33,10 +32,11 @@ const CHIPS: Chip[] = [
 ];
 
 const DEV_SLUGS = [
-  "react", "nextdotjs", "shopify", "typescript", "shadcnui", 
+  "react", "nextdotjs", "shopify", "typescript", 
   "cursor", "github", "vercel", "wordpress", "tailwindcss", 
   "woocommerce", "python", "angular"
 ];
+
 
 const ADS_SLUGS = [
   "meta", "googleads", "spotify", "linkedin", "googlemaps"

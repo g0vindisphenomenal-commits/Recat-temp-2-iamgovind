@@ -5,64 +5,9 @@ import Link from "next/link";
 
 import { FadeIn } from "@/components/ui/motion-primitives";
 
-type BlogPost = {
-  id: string;
-  title: string;
-  description: string;
-  date: string;
-  category: string;
-  readTime: string;
-  image: string;
-  imageAlt: string;
-  imageRatio: number;
-};
+import { POSTS } from "@/lib/blog-data";
+import type { BlogPost } from "@/lib/blog-data";
 
-const POSTS: BlogPost[] = [
-  {
-    id: "seo-strategy-2026",
-    title: "SEO Strategy for 2026: Navigating the AI-Native Search Landscape",
-    description: "Discover how modern AI search engines are redefining content discovery, and learn the actionable organic optimization strategies to keep your brand visible.",
-    date: "Aug 11, 2026",
-    category: "SEO & Growth",
-    readTime: "6 min read",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
-    imageAlt: "Digital marketing analytics and SEO dashboard visualization",
-    imageRatio: 16 / 10,
-  },
-  {
-    id: "conversion-rate-optimization",
-    title: "The Art of CRO: Turning Traffic into Customer Loyalty",
-    description: "An in-depth guide on analyzing user flows, identifying drop-off points, and building frictionless experiences that drive sustained business growth.",
-    date: "Jul 28, 2026",
-    category: "CRO",
-    readTime: "5 min read",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
-    imageAlt: "Data analytics graphs representing conversion rates and business success",
-    imageRatio: 16 / 10,
-  },
-  {
-    id: "quiet-design-maximum-impact",
-    title: "Quiet Design, Maximum Impact: Minimal UX that Converts",
-    description: "Why stripping away digital noise creates spaces that feel calm, trusted, and quietly fast—resulting in higher retention and conversion rates.",
-    date: "Jul 15, 2026",
-    category: "Design",
-    readTime: "4 min read",
-    image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80",
-    imageAlt: "Minimal modern workspace workspace with clean layout",
-    imageRatio: 16 / 10,
-  },
-  {
-    id: "nextjs-for-business-growth",
-    title: "Next.js for Business Growth: Choosing the Right Web Architecture",
-    description: "A pragmatic analysis of standard Single-Page Applications vs. Server-Rendered frameworks, tailored for founders and decision makers aiming for speed and scale.",
-    date: "Jun 20, 2026",
-    category: "Web Dev",
-    readTime: "7 min read",
-    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80",
-    imageAlt: "Programming code displayed on a computer monitor",
-    imageRatio: 16 / 10,
-  },
-];
 
 export function BlogPosts(): ReactNode {
   return (

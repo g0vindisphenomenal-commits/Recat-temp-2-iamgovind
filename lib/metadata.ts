@@ -1,34 +1,40 @@
 import type { Metadata } from "next";
 
 export const siteConfig = {
-  name: "Portfolio",
+  name: "iamgovind",
   description:
-    "A modern, accessible portfolio template built with Next.js, Tailwind CSS, and TypeScript.",
-  url: "https://example.com",
+    "Portfolio of Govind B — Digital Marketer & Full-Stack Web Developer based in Trivandrum, Kerala.",
+  url: "https://iamgovind.com",
   ogImage: "/og-image.png",
-  creator: "@yourhandle",
+  creator: "@iamg0vind",
   authors: [
     {
-      name: "Your Name",
-      url: "https://example.com",
+      name: "Govind B",
+      url: "https://iamgovind.com",
     },
   ],
   keywords: [
-    "portfolio",
-    "personal site",
+    "iamgovind",
+    "Govind",
+    "Digital Marketer",
+    "Web Developer",
+    "Kerala",
+    "Trivandrum",
+    "SEO",
     "Next.js",
     "React",
-    "Tailwind CSS",
-    "TypeScript",
+    "E-Commerce",
   ],
 } as const;
+
 
 export const baseMetadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: siteConfig.name,
-    template: `%s | ${siteConfig.name}`,
+    default: "iamgovind",
+    template: "%s | iamgovind",
   },
+
   description: siteConfig.description,
   keywords: [...siteConfig.keywords],
   authors: [...siteConfig.authors],
@@ -47,7 +53,11 @@ export const baseMetadata: Metadata = {
   },
   alternates: {
     canonical: "/",
+    types: {
+      "application/rss+xml": `${siteConfig.url}/feed.xml`,
+    },
   },
+
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -72,12 +82,19 @@ export const baseMetadata: Metadata = {
     creator: siteConfig.creator,
   },
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon-16x16.png",
+    icon: [
+      { url: "/icon.png", sizes: "512x512", type: "image/png" },
+      { url: "/favicon-black.png", sizes: "512x512", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+    ],
+
+    shortcut: "/favicon-black.png",
     apple: "/apple-icon.png",
   },
-  manifest: "/site.webmanifest",
+  manifest: "/manifest.webmanifest",
 };
+
 
 export function createMetadata({
   title,

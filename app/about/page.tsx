@@ -31,15 +31,16 @@ export default function AboutPage(): ReactNode {
             </h1>
             <div className="mt-8 space-y-6 text-[17px] leading-[1.7] tracking-tight text-foreground/75 sm:text-[18px]">
               <p>
-                A <strong className="font-semibold text-foreground">digital marketer and full-stack web developer</strong> passionate about crafting high-performance online experiences and growing brands. With expertise in performance campaigns, SEO, and modern web applications, I combine technical execution with marketing strategy to drive results.
+                A <strong className="font-semibold text-foreground">digital marketer and full-stack web developer</strong> based in Trivandrum, Kerala. I specialize in designing and engineering high-performance eCommerce platforms and dynamic web applications that combine creativity, speed, and strategic impact.
               </p>
               <p>
-                My approach merges data-driven marketing with modern engineering, allowing me to build speed-optimized sites and launch high-ROI campaigns that connect with the right audience.
+                Working alongside a specialized team of developers, growth marketers, and design collaborators, we focus on building intuitive web platforms and launching targeted performance campaigns that drive measurable ROI and elevate brand presence.
               </p>
               <p>
-                Based in Kerala, India, I partner with businesses globally to build scalable web platforms, optimize conversion rates, and manage strategic digital marketing pipelines.
+                Whether optimizing conversion rates, scaling organic SEO, or engineering full-stack web platforms, our collaborative approach merges data-driven marketing with modern engineering to help businesses grow globally.
               </p>
             </div>
+
           </div>
         </FadeIn>
 
