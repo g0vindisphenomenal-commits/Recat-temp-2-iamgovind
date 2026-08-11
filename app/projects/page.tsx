@@ -20,7 +20,7 @@ export default function ProjectsPage(): ReactNode {
             My recent work
           </h1>
           <p className="max-w-[33ch] text-[20px] leading-[1.4] tracking-tight text-foreground/65 sm:text-[22px]">
-            Experiments, collaborations, and projects I&rsquo;m especially proud to have shipped.
+            My Selected Works
           </p>
         </FadeIn>
       </section>

@@ -12,24 +12,19 @@ type Chip = {
 };
 
 const CHIPS: Chip[] = [
-  { label: "React", slug: "react", bg: "#1FB6CB", fg: "#ffffff" },
-  { label: "Next.js", slug: "nextdotjs", bg: "#1f1f1f", fg: "#ffffff" },
-  { label: "Spotify", slug: "spotify", bg: "#1DB954", fg: "#ffffff" },
-  { label: "TypeScript", slug: "typescript", bg: "#2F74C0", fg: "#ffffff" },
-  { label: "shadcn/ui", slug: "shadcnui", bg: "#5b54ff", fg: "#ffffff" },
-  { label: "Cursor", slug: "cursor", bg: "#111111", fg: "#ffffff" },
-  { label: "GitHub", slug: "github", bg: "#181717", fg: "#ffffff" },
-  { label: "Vercel", slug: "vercel", bg: "#0a0a0a", fg: "#ffffff" },
-  { label: "Google Ads", slug: "googleads", bg: "#4285F4", fg: "#ffffff" },
-  { label: "WordPress", slug: "wordpress", bg: "#21759B", fg: "#ffffff" },
-  { label: "Tailwind CSS", slug: "tailwindcss", bg: "#2BBCF5", fg: "#ffffff" },
-  { label: "WooCommerce", slug: "woocommerce", bg: "#96588A", fg: "#ffffff" },
-  { label: "Python", slug: "python", bg: "#3776AB", fg: "#ffffff" },
-  { label: "Meta", slug: "meta", bg: "#0668E1", fg: "#ffffff" },
-  { label: "Shopify", slug: "shopify", bg: "#96BF48", fg: "#ffffff" },
-  { label: "Business Profile", slug: "googlemaps", bg: "#4285F4", fg: "#ffffff" },
-  { label: "LinkedIn", slug: "linkedin", bg: "#0A66C2", fg: "#ffffff", iconUrl: "/linkedin.svg" },
   { label: "Angular", slug: "angular", bg: "#DD0031", fg: "#ffffff" },
+  { label: "Python", slug: "python", bg: "#3776AB", fg: "#ffffff" },
+  { label: "Flask", slug: "flask", bg: "#000000", fg: "#ffffff" },
+  { label: "FastAPI", slug: "fastapi", bg: "#009688", fg: "#ffffff" },
+  { label: "Azure", slug: "microsoftazure", bg: "#0078D4", fg: "#ffffff" },
+  { label: "AWS", slug: "amazonwebservices", bg: "#FF9900", fg: "#ffffff" },
+  { label: "GCP", slug: "googlecloud", bg: "#4285F4", fg: "#ffffff" },
+  { label: "CI/CD", slug: "githubactions", bg: "#2088FF", fg: "#ffffff" },
+  { label: "Pytest", slug: "pytest", bg: "#0A9ED5", fg: "#ffffff" },
+  { label: "WordPress", slug: "wordpress", bg: "#21759B", fg: "#ffffff" },
+  { label: "Elementor", slug: "elementor", bg: "#92003B", fg: "#ffffff" },
+  { label: "Google Ads", slug: "googleads", bg: "#4285F4", fg: "#ffffff" },
+  { label: "GitHub", slug: "github", bg: "#181717", fg: "#ffffff" },
 ];
 
 const CHIP_RADIUS = 14;
@@ -216,7 +211,7 @@ export function Stack(): ReactNode {
     <div className="flex flex-col gap-3">
       <div className="flex items-center gap-3">
         <h3 className="text-foreground text-[15px] font-semibold tracking-tight">
-          What I do
+          What we do
         </h3>
       </div>
 

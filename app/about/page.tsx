@@ -1,8 +1,9 @@
-import { Education } from "@/components/about/education";
+// import { Education } from "@/components/about/education";
 import { Experience } from "@/components/about/experience";
 import { PolaroidStrip } from "@/components/about/polaroid-strip";
 import { Skills } from "@/components/about/skills";
 import { Stack } from "@/components/about/stack";
+import { Team } from "@/components/about/team";
 import { ContactCard } from "@/components/contact/contact-card";
 import { FadeIn } from "@/components/ui/motion-primitives";
 import { createMetadata } from "@/lib/metadata";
@@ -22,24 +23,28 @@ export default function AboutPage(): ReactNode {
         <PolaroidStrip />
       </section>
 
-      <section className="mx-auto w-full max-w-160 px-6 pt-20 pb-16 sm:px-10 sm:pt-28 sm:pb-24">
-        <FadeIn delay={0.5}>
-          <div className="rounded-4xl border border-foreground/5 bg-foreground/1.5 p-8 sm:p-12 dark:bg-foreground/3">
+      <section className="mx-auto w-full max-w-[40rem] px-6 pt-20 pb-16 sm:px-10 sm:pt-28 sm:pb-24 lg:max-w-275 lg:grid lg:grid-cols-[1.4fr_1fr] lg:gap-8 lg:items-stretch">
+        <FadeIn delay={0.5} className="h-full">
+          <div className="rounded-4xl border border-foreground/5 bg-foreground/1.5 p-8 sm:p-12 dark:bg-foreground/3 h-full flex flex-col justify-center">
             <h1 className="font-serif text-[1.75rem] font-medium tracking-tight text-foreground sm:text-[2rem]">
-              Hello! I&rsquo;m <span className="border-b border-foreground/30 pb-0.5">Josh Mercer</span>.
+              Hello! I&rsquo;m <span className="border-b border-foreground/30 pb-0.5">Govind</span>.
             </h1>
             <div className="mt-8 space-y-6 text-[17px] leading-[1.7] tracking-tight text-foreground/75 sm:text-[18px]">
               <p>
-                A <strong className="font-semibold text-foreground">product designer and frontend engineer</strong> passionate about building intuitive, human-centered digital experiences. With a background in <strong className="font-semibold text-foreground">visual craft</strong> and <strong className="font-semibold text-foreground">interaction design</strong>, I bring a unique blend of design thinking and technical execution to every project.
+                A <strong className="font-semibold text-foreground">digital marketer and full-stack web developer</strong> passionate about crafting high-performance online experiences and growing brands. With expertise in performance campaigns, SEO, and modern web applications, I combine technical execution with marketing strategy to drive results.
               </p>
               <p>
-                My journey into design began when I realized how often good user experience was missing from powerful tools. That led me to embrace <strong className="font-semibold text-foreground">user-centered design</strong> as both a mindset and a craft, one that balances clarity, creativity, and functionality.
+                My approach merges data-driven marketing with modern engineering, allowing me to build speed-optimized sites and launch high-ROI campaigns that connect with the right audience.
               </p>
               <p>
-                Currently leading design at small product teams shipping software for <strong className="font-semibold text-foreground">creative professionals</strong>, I&rsquo;m always looking for opportunities to <strong className="font-semibold text-foreground">shape thoughtful interfaces and build scalable design systems</strong>.
+                Based in Kerala, India, I partner with businesses globally to build scalable web platforms, optimize conversion rates, and manage strategic digital marketing pipelines.
               </p>
             </div>
           </div>
+        </FadeIn>
+
+        <FadeIn delay={0.6} className="mt-8 lg:mt-0">
+          <Team />
         </FadeIn>
       </section>
 
@@ -47,7 +52,7 @@ export default function AboutPage(): ReactNode {
         <FadeIn delay={0.1}>
           <div className="flex flex-col gap-10">
             <Experience />
-            <Education />
+            {/* <Education /> */}
             <Skills />
             <Stack />
           </div>

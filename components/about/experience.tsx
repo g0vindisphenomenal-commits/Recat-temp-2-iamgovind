@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, ChevronRight } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useState, type ReactNode } from "react";
 
@@ -10,56 +10,23 @@ type Entry = {
   period: string;
   slug?: string;
   brand?: string;
+  logoUrl?: string;
+  href?: string;
 };
 
 const ENTRIES: Entry[] = [
   {
-    company: "Linear",
-    role: "Senior Design Engineer",
-    period: "Mar 2024 – Present",
-    slug: "linear",
-    brand: "#5E6AD2",
-  },
-  {
-    company: "Vercel",
-    role: "Product Designer",
-    period: "Aug 2022 – Feb 2024",
-    slug: "vercel",
-    brand: "#0a0a0a",
-  },
-  {
-    company: "Stripe",
-    role: "Design Engineer",
-    period: "Jun 2021 – Jul 2022",
-    slug: "stripe",
-    brand: "#635BFF",
-  },
-  {
-    company: "Figma",
-    role: "UI Engineer",
-    period: "Sep 2019 – May 2021",
-    slug: "figma",
-    brand: "#A259FF",
-  },
-  {
-    company: "Notion",
-    role: "Product Designer",
-    period: "Jan 2018 – Aug 2019",
-    slug: "notion",
-    brand: "#111111",
-  },
-  {
-    company: "Airbnb",
-    role: "Design Intern",
-    period: "May 2017 – Dec 2017",
-    slug: "airbnb",
-    brand: "#FF5A5F",
-  },
-  {
     company: "Freelance",
-    role: "Designer & Developer",
-    period: "2015 – 2017",
-    brand: "#0AE448",
+    role: "Digital Marketer & Developer",
+    period: "2024 – Present",
+    logoUrl: "/freelance.png",
+  },
+  {
+    company: "Think Hub Academy",
+    role: "Digital Marketing Executive",
+    period: "2 yrs 8 mos",
+    logoUrl: "/thinkhub.png",
+    href: "https://thinkhub.academy/",
   },
 ];
 
@@ -95,25 +62,57 @@ export function Experience(): ReactNode {
           style={{ overflow: "hidden" }}
         >
           <ul className="flex flex-col gap-2">
-            {ENTRIES.map((entry) => (
-              <li
-                key={`${entry.company}-${entry.period}`}
-                className="bg-background border-foreground/5 flex items-center gap-4 rounded-3xl border p-2"
-                style={{ minHeight: ROW_HEIGHT }}
-              >
-                <CompanyLogo entry={entry} />
-                <div className="flex min-w-0 flex-col">
-                  <span className="text-foreground text-[17px] font-semibold tracking-tight sm:text-[18px]">
-                    {entry.company}
-                  </span>
-                  <span className="text-foreground/65 mt-0.5 text-[14px] tracking-tight sm:text-[15px]">
-                    {entry.role}
-                    <span className="text-foreground/30 mx-2">•</span>
-                    <span className="text-foreground/55">{entry.period}</span>
-                  </span>
+            {ENTRIES.map((entry) => {
+              const cardContent = (
+                <div className="flex items-center gap-4 w-full">
+                  <CompanyLogo entry={entry} />
+                  <div className="flex min-w-0 flex-col">
+                    <span className="text-foreground text-[17px] font-semibold tracking-tight sm:text-[18px] group-hover:text-foreground">
+                      {entry.company}
+                    </span>
+                    <span className="text-foreground/65 mt-0.5 text-[14px] tracking-tight sm:text-[15px]">
+                      {entry.role}
+                      <span className="text-foreground/30 mx-2">•</span>
+                      <span className="text-foreground/55">{entry.period}</span>
+                    </span>
+                  </div>
+                  {entry.href && (
+                    <span className="ml-auto text-[13px] font-medium text-foreground/50 transition-colors group-hover:text-foreground border border-foreground/8 hover:bg-foreground/5 rounded-xl px-3 py-1.5 inline-flex items-center gap-0.5">
+                      Visit
+                      <ChevronRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
+                    </span>
+                  )}
                 </div>
-              </li>
-            ))}
+              );
+
+              return (
+                <motion.li
+                  key={`${entry.company}-${entry.period}`}
+                  whileHover={{ y: -2, scale: 1.012 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                  className="group relative list-none"
+                >
+                  {entry.href ? (
+                    <a
+                      href={entry.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-background border-foreground/5 flex items-center gap-4 rounded-3xl border p-2 w-full transition-all duration-300 hover:bg-foreground/2 hover:border-foreground/12 hover:shadow-[0_8px_30px_rgb(0,0,0,0.03)] focus-ring"
+                      style={{ minHeight: ROW_HEIGHT }}
+                    >
+                      {cardContent}
+                    </a>
+                  ) : (
+                    <div
+                      className="bg-background border-foreground/5 flex items-center gap-4 rounded-3xl border p-2 w-full transition-all duration-300"
+                      style={{ minHeight: ROW_HEIGHT }}
+                    >
+                      {cardContent}
+                    </div>
+                  )}
+                </motion.li>
+              );
+            })}
           </ul>
         </motion.div>
 
@@ -170,14 +169,23 @@ function CompanyLogo({ entry }: { entry: Entry }): ReactNode {
   const initials = entry.company.charAt(0);
   return (
     <span
-      className="ring-foreground/8 inline-flex h-12 w-12 shrink-0 items-center justify-center bg-white ring-1 dark:ring-white/10"
+      className={`ring-foreground/8 inline-flex h-12 w-12 shrink-0 items-center justify-center ring-1 dark:ring-white/10 overflow-hidden ${entry.logoUrl ? "bg-transparent" : "bg-white"}`}
       aria-hidden="true"
       style={{
         borderRadius: 14,
-        ...(entry.slug ? {} : { backgroundColor: entry.brand }),
+        ...(entry.slug || entry.logoUrl ? {} : { backgroundColor: entry.brand }),
       }}
     >
-      {entry.slug ? (
+      {entry.logoUrl ? (
+        <img
+          src={entry.logoUrl}
+          alt=""
+          width={48}
+          height={48}
+          className="h-full w-full object-cover"
+          draggable={false}
+        />
+      ) : entry.slug ? (
         <img
           src={`https://cdn.simpleicons.org/${entry.slug}`}
           alt=""

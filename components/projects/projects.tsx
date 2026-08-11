@@ -1,12 +1,10 @@
 import {
   ArrowRight,
-  Bot,
-  Compass,
+  Cpu,
+  Film,
   Globe,
-  Layers,
-  LineChart,
-  Sparkles,
-  Wand2,
+  ShoppingBag,
+  Store,
 } from "lucide-react";
 import type { ComponentType, ReactNode } from "react";
 import Image from "next/image";
@@ -35,6 +33,58 @@ type Project = {
 
 const PROJECTS: Project[] = [
   {
+    id: "marhabahospitality",
+    icon: ShoppingBag,
+    iconLabel: "Marhaba Hospitality",
+    title: "E-Commerce Supply Platform for Hotels & Resorts",
+    description:
+      "Designed and developed a premium hospitality supplying website based in Dubai, operating similarly to an e-commerce platform. Built with an Angular frontend and a Python backend, the platform enables commercial clients to browse extensive hospitality catalog categories and seamlessly request custom bulk order quotations.",
+    meta: "Full Stack Developer (Angular & Python), 2026",
+    imageRatio: 1024 / 768,
+    image: "/marhabahospitality.png",
+    imageAlt: "Marhaba Hospitality supplying website mockup",
+    href: "https://marhabahospitality.com/",
+  },
+  {
+    id: "reshmihappyhome",
+    icon: Store,
+    iconLabel: "Reshmi Happy Home",
+    title: "E-Commerce Website for Electronics & Appliances",
+    description:
+      "Designed and developed a robust e-commerce platform for Reshmi Happy Home, an electronics and home appliances store. Built with WordPress and WooCommerce, the site features a custom bottom mobile navigation panel, a dedicated client dashboard, advanced off-canvas product filters, and optimized checkout pipelines for streamlined shopping.",
+    meta: "Full Stack Developer (WordPress & WooCommerce), 2026",
+    imageRatio: 1024 / 768,
+    image: "/reshmihappyhome-actual.png",
+    imageAlt: "Reshmi Happy Home e-commerce website mockup",
+    href: "https://reshmihappyhome.com/",
+  },
+  {
+    id: "cybertruckfilms",
+    icon: Film,
+    iconLabel: "Cybertruck Films",
+    title: "Cinematic Website for a Video Production Company",
+    description:
+      "Designed and developed the official website for Cybertruck Films, a professional video production company specializing in cinematic ads, brand films, photoshoots, and digital content creation. Built on WordPress, the site features a sleek, dark-themed user interface, integrated video showreels, and portfolio grids showcasing their creative projects.",
+    meta: "Designer & Developer (WordPress), 2026",
+    imageRatio: 1024 / 768,
+    image: "/cybertruckfilms-actual.png",
+    imageAlt: "Cybertruck Films website mockup",
+    href: "https://cybertruckfilms.com/",
+  },
+  {
+    id: "microbotit",
+    icon: Cpu,
+    iconLabel: "MicrobotIT",
+    title: "Educational Website for Microbot Institute of Technology",
+    description:
+      "Designed and developed a modern, high-performance website for a premier technical institute in Kochi specializing in advanced hardware and PC engineering. Built on Angular, the site features a dark high-tech aesthetic, interactive course catalogs, labs overview, and enrollment pipelines designed to showcase their hands-on, practical-first training philosophy.",
+    meta: "Frontend Developer (Angular), 2026",
+    imageRatio: 1024 / 640,
+    image: "/microbotit.png",
+    imageAlt: "Microbot Institute of Technology website mockup",
+    href: "https://microbotit.com/",
+  },
+  {
     id: "rijasrazak",
     icon: Globe,
     iconLabel: "Rijasrazak.com",
@@ -43,90 +93,9 @@ const PROJECTS: Project[] = [
       "Designed and developed a professional portfolio website for a digital marketer and social media influencer based in Thrissur. The project focused on creating a clean, modern layout that effectively showcases services, influencer brand deals, expertise, and content creation. Emphasis was placed on user experience, responsive design, and clear call-to-actions to support personal branding and audience engagement.",
     meta: "Designer & Developer, 2026",
     imageRatio: 1024 / 768,
-    image: "/rijasrazak.png",
+    image: "/rijasrazak-actual.png",
     imageAlt: "Rijasrazak.com website mockup",
     href: "https://rijasrazak.com/",
-  },
-  {
-    id: "loom",
-    icon: Sparkles,
-    iconLabel: "LOOM",
-    title:
-      "An AI writing companion that thinks alongside you, allowing you to capture ideas, edits, and drafts in one focused space.",
-    description:
-      "I designed Loom, a focused writing surface where ideas, edits, and drafts coexist without the chat clutter.",
-    meta: "Design Engineer, 2024",
-    imageRatio: 752 / 497,
-    image:
-      "https://cdn.dribbble.com/userupload/46128964/file/b92b9d268dd928642ca94bd49e32923a.jpg?resize=752x497&vertical=center",
-    imageAlt: "Loom AI writing companion mockup",
-  },
-  {
-    id: "atlas",
-    icon: Compass,
-    iconLabel: "Atlas Studio",
-    title: "A two week brand and product sprint for a creative studio.",
-    description:
-      "End to end identity, marketing site, and a small product surface designed to feel quietly confident across every touchpoint.",
-    meta: "Product & Brand Designer, 2025",
-    imageRatio: 1024 / 768,
-    image:
-      "https://cdn.dribbble.com/userupload/24599416/file/original-1ae5075dcd129aebb16bdbca24b41ac7.png?resize=1024x768&vertical=center",
-    imageAlt: "Atlas Studio brand and product sprint mockup",
-  },
-  {
-    id: "rhythm",
-    icon: LineChart,
-    iconLabel: "Rhythm",
-    title: "Calm analytics for indie founders.",
-    description:
-      "A weekly digest that turns raw product data into a simple narrative. Built so you can read it on a Sunday with coffee.",
-    meta: "Founder & Designer, 2024",
-    imageRatio: 1024 / 768,
-    image:
-      "https://cdn.dribbble.com/userupload/47357856/file/75841fa59f32f05ca6c5ddf02d08dfe6.png?resize=1024x768&vertical=center",
-    imageAlt: "Rhythm calm analytics mockup",
-  },
-  {
-    id: "groove",
-    icon: Wand2,
-    iconLabel: "Groove",
-    title:
-      "Reimagining the booking flow for a music school, asisting thousands of students in finding the right lessons.",
-    description:
-      "I led a redesign of the lesson booking experience, cutting drop off in half and making the schedule feel like a calendar people actually want to open.",
-    meta: "Lead Designer, 2023",
-    imageRatio: 1024 / 768,
-    image:
-      "https://cdn.dribbble.com/userupload/43955214/file/original-d4cde1de803e84b97d8892e3444c04b0.png?resize=1024x768&vertical=center",
-    imageAlt: "Groove music school booking flow mockup",
-  },
-  {
-    id: "fieldnote",
-    icon: Layers,
-    iconLabel: "Fieldnote",
-    title:
-      "A pocket sized research tool for design teams that want to get out of their docs and into the world.",
-    description:
-      "Capture quotes, tag patterns, and synthesize themes in one place. The interface stays out of the way so the thinking can happen.",
-    meta: "Design Engineer, 2024",
-    imageRatio: 1024 / 768,
-    image:
-      "https://cdn.dribbble.com/userupload/30310902/file/original-621e7fe47be9d11ee14544456c693bec.png?resize=1024x768&vertical=center",
-    imageAlt: "Fieldnote pocket sized research tool mockup",
-  },
-  {
-    id: "talkback",
-    icon: Bot,
-    iconLabel: "Talkback",
-    title: "A friendlier interface for talking to language models.",
-    description:
-      "An exploration of how AI chat could feel less like a terminal and more like a conversation with a curious friend.",
-    meta: "Independent Project, 2025",
-    imageRatio: 1024 / 768,
-    image:
-      "https://cdn.dribbble.com/userupload/16560717/file/original-c6f745d50302d66609bfe080f99f5396.png?resize=1024x768&vertical=center",
-    imageAlt: "Talkback friendlier AI chat interface mockup",
   },
 ];
 
