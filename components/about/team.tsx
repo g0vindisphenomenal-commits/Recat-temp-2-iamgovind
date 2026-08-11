@@ -62,28 +62,58 @@ const MEMBERS: Member[] = [
 export function Team(): ReactNode {
   const [name, setName] = useState("");
   const [link, setLink] = useState("");
-  const [fileName, setFileName] = useState("");
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      setFileName(e.target.files[0].name);
+      setSelectedFile(e.target.files[0]);
     } else {
-      setFileName("");
+      setSelectedFile(null);
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name.trim()) return;
-    
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setName("");
-      setLink("");
-      setFileName("");
-    }, 3000);
+    if (!name.trim() || isSubmitting) return;
+
+    setIsSubmitting(true);
+    setErrorMessage("");
+
+    try {
+      const formData = new FormData();
+      formData.append("access_key", "f23dc381-88cc-4186-9836-c2ab83a4dd4f");
+      formData.append("name", name);
+      formData.append("portfolio_link", link || "Not provided");
+      formData.append("subject", `New Collaboration Request from ${name}`);
+      formData.append("from_name", "Govind Portfolio Site");
+      if (selectedFile) {
+        formData.append("attachment", selectedFile);
+      }
+
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSubmitted(true);
+        setName("");
+        setLink("");
+        setSelectedFile(null);
+        setTimeout(() => setSubmitted(false), 5000);
+      } else {
+        setErrorMessage(data.message || "Submission failed. Please try again.");
+      }
+    } catch {
+      setErrorMessage("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -158,10 +188,13 @@ export function Team(): ReactNode {
                 className="bg-green-500/10 border border-green-500/20 text-green-600 dark:text-green-400 rounded-2xl p-4 flex items-center justify-center gap-2 text-[13px] font-medium"
               >
                 <Check className="h-4 w-4 text-green-500" />
-                Application submitted successfully!
+                Application sent directly to Govind!
               </motion.div>
             ) : (
               <form onSubmit={handleSubmit} className="flex flex-col gap-2.5">
+                {errorMessage && (
+                  <p className="text-red-500 text-[12px] px-1">{errorMessage}</p>
+                )}
                 <div className="flex gap-2">
                   <input
                     type="text"
@@ -184,7 +217,7 @@ export function Team(): ReactNode {
                   <label className="flex-1 cursor-pointer bg-background hover:bg-foreground/5 border border-foreground/8 border-dashed rounded-2xl px-3 py-2 text-[12px] text-center text-foreground/55 transition-colors flex items-center justify-center gap-1.5 select-none truncate max-w-[200px] sm:max-w-none">
                     <Paperclip className="h-3.5 w-3.5 shrink-0" />
                     <span className="truncate">
-                      {fileName ? fileName : "Upload your work"}
+                      {selectedFile ? selectedFile.name : "Upload your work"}
                     </span>
                     <input
                       type="file"
@@ -196,9 +229,10 @@ export function Team(): ReactNode {
                   
                   <button
                     type="submit"
-                    className="bg-foreground text-background hover:opacity-90 transition-opacity font-semibold text-[13px] rounded-2xl px-4 py-2 flex items-center gap-1 shrink-0 cursor-pointer"
+                    disabled={isSubmitting}
+                    className="bg-foreground text-background hover:opacity-90 transition-opacity font-semibold text-[13px] rounded-2xl px-4 py-2 flex items-center gap-1 shrink-0 cursor-pointer disabled:opacity-50"
                   >
-                    Send
+                    {isSubmitting ? "Sending..." : "Send"}
                     <Send className="h-3 w-3" />
                   </button>
                 </div>
@@ -210,3 +244,4 @@ export function Team(): ReactNode {
     </div>
   );
 }
+
