@@ -164,7 +164,8 @@ export const POSTS: BlogPost[] = [
     category: "WordPress & Dev",
     readTime: "5 min read",
     image:
-      "https://images.unsplash.com/photo-1556742049-0a67568d049f?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=1200&q=80",
+
     imageAlt: "Mobile UPI payment interface on smartphone",
     imageRatio: 16 / 10,
     author: {
