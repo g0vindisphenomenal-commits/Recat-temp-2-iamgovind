@@ -70,7 +70,8 @@ function SchoolLogo({ entry }: { entry: Entry }): ReactNode {
     >
       {entry.slug ? (
         <img
-          src={`https://cdn.simpleicons.org/${entry.slug}`}
+          src={`/icons/${entry.slug}.svg`}
+
           alt=""
           width={24}
           height={24}

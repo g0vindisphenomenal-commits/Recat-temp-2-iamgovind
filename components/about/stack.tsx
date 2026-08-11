@@ -279,7 +279,8 @@ function ChipPill({ chip }: { chip: Chip }): ReactNode {
         aria-hidden="true"
       >
         <img
-          src={chip.iconUrl ?? `https://cdn.simpleicons.org/${chip.slug}`}
+          src={chip.iconUrl ?? `/icons/${chip.slug}.svg`}
+
           alt=""
           width={18}
           height={18}
