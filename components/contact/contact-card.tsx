@@ -112,11 +112,6 @@ export function ContactCard(): ReactNode {
                   </BrandSocialIcon>
                 </div>
 
-                <div className="flex flex-col items-center justify-center text-center">
-                  <p className="text-[13px] tracking-tight text-foreground/70">
-                    i do
-                  </p>
-                </div>
               </div>
             </div>
           </div>
