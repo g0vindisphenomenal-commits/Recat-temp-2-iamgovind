@@ -155,7 +155,7 @@ body {
   transform: scaleX(-1);
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px), (hover: none) and (pointer: coarse) {
   .site-frame,
   .site-corner {
     display: none !important;
