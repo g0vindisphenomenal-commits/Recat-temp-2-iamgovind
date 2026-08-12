@@ -13,6 +13,7 @@ type Polaroid = {
   image?: string;
   video?: string;
   scratch?: boolean;
+  location?: boolean;
 };
 
 const PHOTOS: Polaroid[] = [
@@ -21,10 +22,90 @@ const PHOTOS: Polaroid[] = [
   { id: "c", rotate: -4, image: "/polaroid-dark.jpg" },
   { id: "d", rotate: 7, video: "/polaroid-video.3gp" },
   { id: "e", rotate: -6, scratch: true },
-  { id: "f", rotate: 5 },
+  { id: "f", rotate: 5, location: true },
 ];
 
 const EASE = [0.22, 1, 0.36, 1] as const;
+
+function getFlagEmoji(countryCode: string): string {
+  if (!countryCode || countryCode.length !== 2) return "📍";
+  const codePoints = countryCode
+    .toUpperCase()
+    .split("")
+    .map((char) => 127397 + char.charCodeAt(0));
+  return String.fromCodePoint(...codePoints);
+}
+
+function LocationPolaroidCard(): ReactNode {
+  const [locationInfo, setLocationInfo] = useState<{
+    city: string;
+    country: string;
+    code: string;
+  } | null>(null);
+
+  useEffect(() => {
+    fetch("https://ip-api.com/json/?fields=city,country,countryCode,status")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status === "success" && data.city && data.country) {
+          setLocationInfo({
+            city: data.city,
+            country: data.country,
+            code: data.countryCode || "IN",
+          });
+        } else {
+          setLocationInfo({ city: "Trivandrum", country: "India", code: "IN" });
+        }
+      })
+      .catch(() => {
+        setLocationInfo({ city: "Trivandrum", country: "India", code: "IN" });
+      });
+  }, []);
+
+  const flag = locationInfo ? getFlagEmoji(locationInfo.code) : "📍";
+
+  return (
+    <div className="relative h-full w-full overflow-hidden rounded-xl bg-neutral-950 p-2 text-white flex flex-col justify-between items-center text-center border border-white/10 select-none">
+      {/* Background Map Mesh Pattern */}
+      <div
+        className="absolute inset-0 opacity-20 pointer-events-none"
+        style={{
+          backgroundImage: "radial-gradient(circle at 50% 50%, #ffffff 1px, transparent 1px)",
+          backgroundSize: "12px 12px",
+        }}
+      />
+
+      {/* Top Header Badge */}
+      <div className="relative z-10 flex items-center gap-1.5 pt-1">
+        <span className="relative flex h-2 w-2">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+          <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+        </span>
+        <span className="text-[9px] sm:text-[10px] font-semibold tracking-wider uppercase text-emerald-400">
+          Your Location
+        </span>
+      </div>
+
+      {/* Center Location Content */}
+      <div className="relative z-10 flex flex-col items-center justify-center my-auto py-1">
+        <span className="text-2xl sm:text-3xl mb-0.5 drop-shadow-sm">{flag}</span>
+        <h4 className="text-xs sm:text-sm font-bold tracking-tight text-white line-clamp-1">
+          {locationInfo ? locationInfo.city : "Detecting..."}
+        </h4>
+        <p className="text-[10px] font-medium text-neutral-400 tracking-tight line-clamp-1">
+          {locationInfo ? locationInfo.country : "Location"}
+        </p>
+      </div>
+
+      {/* Bottom Subtext */}
+      <div className="relative z-10 w-full pt-1 border-t border-white/10">
+        <span className="text-[9px] font-medium text-neutral-400 tracking-tight block">
+          Welcome! 👋
+        </span>
+      </div>
+    </div>
+  );
+}
 
 function ScratchPolaroidCard(): ReactNode {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -136,7 +217,9 @@ function PolaroidCard({
       }}
       className="relative aspect-[3/4] w-[clamp(6rem,11vw,9rem)] shrink-0 overflow-hidden rounded-2xl border-6 border-neutral-300/40 bg-white p-1.5 dark:border-white/15 dark:bg-neutral-900"
     >
-      {photo.scratch ? (
+      {photo.location ? (
+        <LocationPolaroidCard />
+      ) : photo.scratch ? (
         <ScratchPolaroidCard />
       ) : photo.video ? (
         <video
