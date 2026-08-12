@@ -146,11 +146,18 @@ const GridItem = ({ area, icon, title, children, transitionDuration = "300ms", t
 };
 
 const Tool = ({ name, icon }: { name: string; icon: string }) => {
+  const [open, setOpen] = useState(false);
+
   return (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger>
-          <div className="flex items-center">
+    <TooltipProvider delayDuration={0}>
+      <Tooltip open={open} onOpenChange={setOpen}>
+        <TooltipTrigger asChild>
+          <button
+            type="button"
+            onClick={() => setOpen((prev) => !prev)}
+            onTouchStart={() => setOpen(true)}
+            className="flex items-center focus:outline-none cursor-pointer p-1 rounded-lg hover:bg-foreground/5 transition-colors"
+          >
             <Image
               src={`${icon}`}
               alt={`${name} icon`}
@@ -159,7 +166,7 @@ const Tool = ({ name, icon }: { name: string; icon: string }) => {
               className="h-8 w-8"
               loading="eager"
             />
-          </div>
+          </button>
         </TooltipTrigger>
         <TooltipContent sideOffset={5}>
           <p className="text-sm font-semibold text-muted-foreground">{name}</p>
