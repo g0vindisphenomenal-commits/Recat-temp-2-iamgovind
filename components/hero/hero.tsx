@@ -28,7 +28,7 @@ export function Hero(): ReactNode {
               <span className="block">web developer</span>
             </h1>
 
-            <p className="max-w-xl text-[20px] sm:text-[22px] leading-[1.4] tracking-tight text-foreground/65">
+            <p className="whitespace-nowrap overflow-hidden text-ellipsis text-[11.5px] min-[380px]:text-[13px] sm:text-[14.5px] md:text-[15px] leading-snug tracking-tight text-foreground/65">
               Digital marketer &amp; web developer driving traffic &amp; sales.
             </p>
 
