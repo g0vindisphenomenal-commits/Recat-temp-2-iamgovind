@@ -16,6 +16,7 @@ import { SpotlightGlow } from "@/components/ui/spotlight-glow";
 import { CustomCursor } from "@/components/ui/custom-cursor";
 
 export default function Dashboard() {
+  const [isActive, setIsActive] = useState(true);
   const dashboardIconClass = "h-3.5 w-3.5 text-foreground";
 
   return (
@@ -29,13 +30,13 @@ export default function Dashboard() {
           title="Development"
           transitionDuration="100ms"
         >
-          <ToolsMarquee />
+          <ToolsMarquee paused={!isActive} />
         </GridItem>
         <GridItem
           area="engagement"
           transitionDuration="150ms"
         >
-          <EngagementTile />
+          <EngagementTile isActive={isActive} setIsActive={setIsActive} />
         </GridItem>
       </ul>
     </div>
@@ -176,7 +177,7 @@ const Tool = ({ name, icon }: { name: string; icon: string }) => {
   );
 };
 
-const ToolsMarquee = () => {
+const ToolsMarquee = ({ paused = false }: { paused?: boolean }) => {
   const { theme, resolvedTheme } = useTheme();
   const [isMounted, setIsMounted] = useState(false);
 
@@ -198,7 +199,7 @@ const ToolsMarquee = () => {
     <div className="relative overflow-hidden">
       <div className="fade-mask-left transition-all duration-400" />
       <div className="fade-mask-right transition-all duration-400" />
-      <Marquee pauseOnHover className="[--duration:20s]">
+      <Marquee pauseOnHover paused={paused} className="[--duration:20s]">
         <div className="flex items-center gap-6">
           {processedToolsData.map(({ name, icon }) => (
             <Tool key={name} name={name} icon={icon} />
@@ -209,8 +210,13 @@ const ToolsMarquee = () => {
   );
 };
 
-const EngagementTile = () => {
-  const [isActive, setIsActive] = useState(true);
+const EngagementTile = ({
+  isActive,
+  setIsActive,
+}: {
+  isActive: boolean;
+  setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
 
   return (
     <div className="flex flex-col gap-2.5 sm:gap-3 p-0.5">
