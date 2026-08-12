@@ -14,7 +14,7 @@ type Polaroid = {
 const PHOTOS: Polaroid[] = [
   { id: "a", rotate: -8, image: "/polaroid-govind.jpg" },
   { id: "b", rotate: 6, image: "/polaroid-pixel.jpg" },
-  { id: "c", rotate: -4 },
+  { id: "c", rotate: -4, image: "/polaroid-dark.jpg" },
   { id: "d", rotate: 7 },
   { id: "e", rotate: -6 },
   { id: "f", rotate: 5 },
