@@ -18,7 +18,7 @@ import { FadeIn } from "@/components/ui/motion-primitives";
 import { TransitionLink } from "@/components/ui/transition-link";
 
 import { getAllPosts, getPostBySlug, getRelatedPosts } from "@/lib/blog-data";
-import type { BlogPost, BlogPostSection } from "@/lib/blog-data";
+import type { BlogPostSection } from "@/lib/blog-data";
 import { createMetadata } from "@/lib/metadata";
 
 type PageProps = {
@@ -174,24 +174,82 @@ export default async function BlogPostPage({ params }: PageProps): Promise<React
 
       {/* Related Posts Section */}
       {relatedPosts.length > 0 && (
-        <section className="w-full border-t border-foreground/8 bg-foreground/1 dark:bg-foreground/2 py-16">
-          <div className="mx-auto w-full max-w-275 px-6 sm:px-10">
+        <section className="w-full border-t border-border/60 py-16">
+          <div className="mx-auto w-full max-w-4xl px-4">
             <div className="mb-8 flex items-center justify-between">
-              <h2 className="font-serif text-[1.75rem] font-medium tracking-tight text-foreground sm:text-[2rem]">
-                Continue reading
+              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
+                Continue{" "}
+                <span className="font-script font-normal text-[1.05em] leading-none align-baseline text-foreground">
+                  reading
+                </span>
+                .
               </h2>
               <TransitionLink
                 href="/blog"
-                className="text-xs font-semibold text-foreground/70 hover:text-foreground transition-colors"
+                className="group text-xs sm:text-sm font-medium text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-1"
               >
-                View all insights →
+                View all writing
+                <IconArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
               </TransitionLink>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <ul className="flex flex-col divide-y divide-border/60">
               {relatedPosts.map((relPost, index) => (
-                <RelatedCard key={relPost.id} post={relPost} index={index} />
+                <FadeIn key={relPost.id} delay={index * 0.05} className="py-6 first:pt-0">
+                  <li>
+                    <TransitionLink
+                      href={`/blog/${relPost.id}`}
+                      className="group flex items-start gap-4 sm:gap-6"
+                    >
+                      {relPost.image && (
+                        <div
+                          className="relative aspect-video w-28 sm:w-44 shrink-0 overflow-hidden rounded-md border border-border/60 bg-foreground/5"
+                          style={{ viewTransitionName: `post-image-${relPost.id}` }}
+                        >
+                          <Image
+                            src={relPost.image}
+                            alt={relPost.imageAlt ?? relPost.title}
+                            fill
+                            sizes="(max-width: 640px) 112px, 176px"
+                            className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                          />
+                        </div>
+                      )}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-baseline justify-between gap-3 sm:gap-6 mb-2">
+                          <h3
+                            className="text-xl sm:text-2xl font-semibold tracking-tight text-foreground transition-colors"
+                            style={{ viewTransitionName: `post-title-${relPost.id}` }}
+                          >
+                            <span className="pb-1 bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_1px] bg-left-bottom bg-no-repeat transition-[background-size] duration-300 group-hover:bg-[length:100%_1px]">
+                              {relPost.title}
+                            </span>
+                            <IconArrowUpRight className="inline-block ml-1 h-4 w-4 text-muted-foreground transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-foreground" />
+                          </h3>
+                          <time className="shrink-0 text-xs text-muted-foreground tabular-nums mt-1">
+                            {relPost.date}
+                          </time>
+                        </div>
+                        <p className="text-muted-foreground leading-relaxed mb-3 text-sm sm:text-base line-clamp-2">
+                          {relPost.description}
+                        </p>
+                        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-muted-foreground">
+                          <span>{relPost.readTime}</span>
+                          {relPost.tags && relPost.tags.length > 0 && (
+                            <>
+                              <span aria-hidden>·</span>
+                              <span className="lowercase">
+                                {relPost.tags.join(", ")}
+                              </span>
+                            </>
+                          )}
+                        </div>
+                      </div>
+                    </TransitionLink>
+                  </li>
+                </FadeIn>
               ))}
-            </div>
+            </ul>
           </div>
         </section>
       )}
@@ -254,52 +312,4 @@ function RenderSection({ section }: { section: BlogPostSection }): ReactNode {
     default:
       return null;
   }
-}
-
-function RelatedCard({ post, index }: { post: BlogPost; index: number }): ReactNode {
-  return (
-    <FadeIn delay={index * 0.1}>
-      <TransitionLink href={`/blog/${post.id}`} className="block group h-full">
-        <article className="project-card flex h-full cursor-pointer flex-col justify-between rounded-3xl border border-foreground/8 bg-background p-3 sm:p-3.5">
-          <div className="flex flex-col gap-4">
-            <header className="flex items-center justify-between px-1 pt-2">
-              <span className="inline-flex items-center rounded-lg bg-foreground/5 px-2.5 py-1 text-xs font-semibold text-foreground/80">
-                {post.category}
-              </span>
-              <span className="text-xs text-foreground/50">{post.readTime}</span>
-            </header>
-
-            <div
-              className="project-card__image ring-foreground/5 relative w-full overflow-hidden rounded-2xl bg-foreground/5 ring-1"
-              style={{ aspectRatio: post.imageRatio, viewTransitionName: `post-image-${post.id}` }}
-            >
-              <div className="project-card__image-inner">
-                <Image
-                  src={post.image}
-                  alt={post.imageAlt}
-                  fill
-                  sizes="(min-width: 768px) 45vw, 100vw"
-                  className="object-cover"
-                />
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-2 px-1 pb-1">
-              <h3
-                className="text-[18px] font-medium leading-[1.25] tracking-tight text-foreground sm:text-[20px] group-hover:text-foreground/80 transition-colors"
-                style={{ viewTransitionName: `post-title-${post.id}` }}
-              >
-                {post.title}
-              </h3>
-            </div>
-          </div>
-
-          <div className="mt-4 flex items-center gap-1 px-1 pb-2 text-[13px] font-medium text-foreground group-hover:text-foreground/80 transition-colors">
-            <span>Read article</span>
-            <IconArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-          </div>
-        </article>
-      </TransitionLink>
-    </FadeIn>
-  );
 }
