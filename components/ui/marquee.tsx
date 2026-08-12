@@ -80,6 +80,10 @@ export function Marquee({
   const handleMouseLeaveContainer = (e: React.MouseEvent<HTMLDivElement>) => {
     onMouseLeave?.(e);
     handleMouseLeaveOrUp();
+    if (hoverTimerRef.current) {
+      clearTimeout(hoverTimerRef.current);
+    }
+    setIsHoverPaused(false);
   };
 
   const isCurrentlyPaused = paused || isDragging || (pauseOnHover && isHoverPaused);
