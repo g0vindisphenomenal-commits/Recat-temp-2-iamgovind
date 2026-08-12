@@ -118,7 +118,7 @@ export function Projects({
             <h2 className="font-serif text-[2.5rem] font-medium leading-[1.05] tracking-tight text-foreground md:text-[3rem] lg:text-[3.5rem]">
               My projects
             </h2>
-            <p className="max-w-[33ch] text-[18px] leading-[1.45] tracking-tight text-foreground/65 sm:text-[20px]">
+            <p className="max-w-full text-[18px] leading-[1.45] tracking-tight text-foreground/65 sm:text-[20px]">
               From playful experiments to thoughtful systems, a look at the
               work I&rsquo;m proud to have shipped.
             </p>

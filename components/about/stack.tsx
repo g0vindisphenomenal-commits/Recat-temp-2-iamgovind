@@ -2,29 +2,41 @@
 
 import { RotateCcw } from "lucide-react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useTheme } from "next-themes";
 
 type Chip = {
   label: string;
-  slug: string;
+  icon: string;
   bg: string;
   fg: string;
-  iconUrl?: string;
+  themeDependent?: boolean;
 };
 
 const CHIPS: Chip[] = [
-  { label: "Angular", slug: "angular", bg: "#DD0031", fg: "#ffffff" },
-  { label: "Python", slug: "python", bg: "#3776AB", fg: "#ffffff" },
-  { label: "Flask", slug: "flask", bg: "#000000", fg: "#ffffff" },
-  { label: "FastAPI", slug: "fastapi", bg: "#009688", fg: "#ffffff" },
-  { label: "Azure", slug: "microsoftazure", bg: "#0078D4", fg: "#ffffff" },
-  { label: "AWS", slug: "amazonwebservices", bg: "#FF9900", fg: "#ffffff" },
-  { label: "GCP", slug: "googlecloud", bg: "#4285F4", fg: "#ffffff" },
-  { label: "CI/CD", slug: "githubactions", bg: "#2088FF", fg: "#ffffff" },
-  { label: "Pytest", slug: "pytest", bg: "#0A9ED5", fg: "#ffffff" },
-  { label: "WordPress", slug: "wordpress", bg: "#21759B", fg: "#ffffff" },
-  { label: "Elementor", slug: "elementor", bg: "#92003B", fg: "#ffffff" },
-  { label: "Google Ads", slug: "googleads", bg: "#4285F4", fg: "#ffffff" },
-  { label: "GitHub", slug: "github", bg: "#181717", fg: "#ffffff" },
+  { label: "React", icon: "react", bg: "#20232A", fg: "#61DAFB" },
+  { label: "React Native", icon: "reactnative", bg: "#20232A", fg: "#61DAFB" },
+  { label: "NextJS", icon: "nextjs", bg: "#000000", fg: "#ffffff", themeDependent: true },
+  { label: "Shopify", icon: "shopify", bg: "#95BF47", fg: "#ffffff" },
+  { label: "WordPress", icon: "wordpress", bg: "#21759B", fg: "#ffffff" },
+  { label: "WooCommerce", icon: "woocommerce", bg: "#96588A", fg: "#ffffff" },
+  { label: "Angular", icon: "angular", bg: "#DD0031", fg: "#ffffff" },
+  { label: "NodeJS", icon: "nodejs", bg: "#339933", fg: "#ffffff" },
+  { label: "Javascript", icon: "javascript", bg: "#F7DF1E", fg: "#000000" },
+  { label: "Typescript", icon: "typescript", bg: "#3178C6", fg: "#ffffff" },
+  { label: "Express", icon: "express", bg: "#000000", fg: "#ffffff" },
+  { label: "C", icon: "c", bg: "#A8B9CC", fg: "#000000" },
+  { label: "C++", icon: "cpp", bg: "#00599C", fg: "#ffffff" },
+  { label: "Python", icon: "python", bg: "#3776AB", fg: "#ffffff" },
+  { label: "HTML", icon: "html", bg: "#E34F26", fg: "#ffffff" },
+  { label: "CSS", icon: "css", bg: "#1572B6", fg: "#ffffff" },
+  { label: "TailwindCSS", icon: "tailwind", bg: "#06B6D4", fg: "#ffffff" },
+  { label: "MongoDB", icon: "mongodb", bg: "#47A248", fg: "#ffffff" },
+  { label: "SQL", icon: "sql", bg: "#003B57", fg: "#ffffff" },
+  { label: "Docker", icon: "docker", bg: "#2496ED", fg: "#ffffff" },
+  { label: "Git", icon: "git", bg: "#F05032", fg: "#ffffff" },
+  { label: "Github", icon: "github", bg: "#181717", fg: "#ffffff", themeDependent: true },
+  { label: "Figma", icon: "figma", bg: "#F24E1E", fg: "#ffffff" },
+  { label: "VSCode", icon: "vscode", bg: "#007ACC", fg: "#ffffff" },
 ];
 
 const CHIP_RADIUS = 14;
@@ -215,7 +227,7 @@ export function Stack(): ReactNode {
         </h3>
       </div>
 
-      <div className="border-foreground/5 bg-foreground/2 dark:bg-foreground/5 relative h-40 overflow-hidden rounded-4xl border sm:h-64 cursor-grab select-none">
+      <div className="border-foreground/5 bg-foreground/2 dark:bg-foreground/5 relative h-64 overflow-hidden rounded-4xl border sm:h-80 cursor-grab select-none">
         <button
           type="button"
           onClick={() => setResetKey((k) => k + 1)}
@@ -264,6 +276,13 @@ export function Stack(): ReactNode {
 }
 
 function ChipPill({ chip }: { chip: Chip }): ReactNode {
+  const { theme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  const currentTheme = theme || resolvedTheme || "dark";
+  const iconPath = `/tools/${chip.icon}${chip.themeDependent && currentTheme === "dark" ? "-dark" : ""}.svg`;
+
   return (
     <div
       className="dark:ring-1 dark:ring-white/15 inline-flex items-center gap-2 p-1 pr-3 text-[15px] font-medium tracking-tight sm:text-[16px] shrink-0"
@@ -278,15 +297,16 @@ function ChipPill({ chip }: { chip: Chip }): ReactNode {
         style={{ borderRadius: `${ICON_RADIUS}px` }}
         aria-hidden="true"
       >
-        <img
-          src={chip.iconUrl ?? `/icons/${chip.slug}.svg`}
-
-          alt=""
-          width={18}
-          height={18}
-          className="h-5 w-5"
-          draggable={false}
-        />
+        {mounted && (
+          <img
+            src={iconPath}
+            alt={chip.label}
+            width={18}
+            height={18}
+            className="h-5 w-5 object-contain"
+            draggable={false}
+          />
+        )}
       </span>
       <span>{chip.label}</span>
     </div>

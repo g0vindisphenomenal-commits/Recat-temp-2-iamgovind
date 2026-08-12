@@ -95,22 +95,6 @@ export default async function BlogPostPage({ params }: PageProps): Promise<React
           <p className="max-w-3xl text-[19px] leading-[1.5] tracking-tight text-foreground/70 sm:text-[21px]">
             {post.description}
           </p>
-
-          {/* Author Badge */}
-          <div className="mt-2 flex items-center gap-3.5 border-t border-foreground/8 pt-6">
-            <div className="relative h-12 w-12 overflow-hidden rounded-full ring-1 ring-foreground/10 bg-foreground/5">
-              <Image
-                src={post.author.avatar}
-                alt={post.author.name}
-                fill
-                className="object-cover"
-              />
-            </div>
-            <div className="flex flex-col">
-              <span className="text-sm font-semibold text-foreground">{post.author.name}</span>
-              <span className="text-xs text-foreground/60">{post.author.role}</span>
-            </div>
-          </div>
         </FadeIn>
 
         {/* Hero Featured Image */}

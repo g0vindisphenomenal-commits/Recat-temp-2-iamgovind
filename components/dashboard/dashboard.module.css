@@ -1,0 +1,20 @@
+.dashboardGrid {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "tools"
+    "engagement";
+}
+.dashboardGrid > li {
+  min-width: 0;
+}
+@media (min-width: 700px) {
+  .dashboardGrid {
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      "tools tools tools tools tools tools tools tools tools tools"
+      "engagement engagement engagement engagement engagement engagement engagement engagement engagement engagement";
+  }
+}

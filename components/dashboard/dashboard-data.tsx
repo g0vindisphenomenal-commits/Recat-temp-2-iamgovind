@@ -1,0 +1,70 @@
+import { IconMail, IconBrandLinkedin, IconBrandGithub, IconBrandInstagram } from "@tabler/icons-react"
+
+export const dashboardData = {
+  contact: [
+    {
+      href: "mailto:govind@example.com",
+      label: "Email",
+      icon: <IconMail className="h-5 w-5" />,
+      aria: "Email",
+    },
+    {
+      href: "https://www.linkedin.com/in/govind",
+      label: "LinkedIn",
+      icon: <IconBrandLinkedin className="h-5 w-5" />,
+      aria: "LinkedIn",
+    },
+    {
+      href: "https://github.com/govind",
+      label: "GitHub",
+      icon: <IconBrandGithub className="h-5 w-5" />,
+      aria: "GitHub",
+    },
+    {
+      href: "https://instagram.com/govind",
+      label: "Instagram",
+      icon: <IconBrandInstagram className="h-5 w-5" />,
+      aria: "Instagram",
+    },
+  ],
+
+  scratchGifs: [
+    "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3YXJld3JyYXo1Z3d1Nnh1ZzFxbXU3ZzV5N3JiamNsa3ByMHBvam1vaiZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/eOjuCYIGqXSqfBy0MX/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3aGh0YmFybmt1d3d4ZGY0c2lyMDhmcTlnMTBkanozNGxuangydjluaSZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/AEDD6xjlOxNMgFsUmA/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOWdnMDcycTF1ejAyNm1yamVuMTZpZTcxd3UwemhxbzcweGVsMDl5aSZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/LqgrTA39s77U8JKhJd/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTY3c293N2VhdDFsMmFkdG85MGpjcnRrd2xybHUwZnI2dGdwdnpzYSZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/xYPdnwsRPZDhCxXvOi/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3YXZjdjljYzM0NzhoOHNjajZldDQ2ZzU5YTF5MTExOXQxbGdpdjAxZSZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/20JY76TfKAhR20SfJu/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3YXZjdjljYzM0NzhoOHNjajZldDQ2ZzU5YTF5MTExOXQxbGdpdjAxZSZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/MxZKME5mbgeXckKp14/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ2Y2N2FvYTl6bTkxeGlzanpxNmJrOXh1bXBuY3gyY2ljeHpweWVlMSZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/d9UAwX6gd6d3zYrTF5/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3amtteDRyNWx4OHpmODVlMXo3YnBlczd3dGRoMWVlcWE5MzJxMjA2cyZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/kimWBtJDjWcwFH2nRB/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaTNtcmFyajY4MzNldzVkanU5dHNzdTBnaWJibmo0d2wycm5xOWRzZCZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/GPWKoHhTMmjTYqOTVG/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NzAwZmVqd2tyM2t4c28xZHprem00dzR3bW9vZDZ2d2FzZDV5dTkxNiZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/wMQTobBKTpmg5TLuZ5/giphy.gif",
+  ],
+
+  tools: [
+    { name: "React", icon: "react", themeDependent: false },
+    { name: "React Native", icon: "reactnative", themeDependent: false },
+    { name: "NextJS", icon: "nextjs", themeDependent: true },
+    { name: "Shopify", icon: "shopify", themeDependent: false },
+    { name: "WordPress", icon: "wordpress", themeDependent: false },
+    { name: "WooCommerce", icon: "woocommerce", themeDependent: false },
+    { name: "Angular", icon: "angular", themeDependent: false },
+    { name: "NodeJS", icon: "nodejs", themeDependent: false },
+    { name: "Javascript", icon: "javascript", themeDependent: false },
+    { name: "Typescript", icon: "typescript", themeDependent: false },
+    { name: "Express", icon: "express", themeDependent: false },
+    { name: "C", icon: "c", themeDependent: false },
+    { name: "C++", icon: "cpp", themeDependent: false },
+    { name: "Python", icon: "python", themeDependent: false },
+    { name: "HTML", icon: "html", themeDependent: false },
+    { name: "CSS", icon: "css", themeDependent: false },
+    { name: "TailwindCSS", icon: "tailwind", themeDependent: false },
+    { name: "MongoDB", icon: "mongodb", themeDependent: false },
+    { name: "SQL", icon: "sql", themeDependent: false },
+    { name: "Docker", icon: "docker", themeDependent: false },
+    { name: "Git", icon: "git", themeDependent: false },
+    { name: "Github", icon: "github", themeDependent: true },
+    { name: "Figma", icon: "figma", themeDependent: false },
+    { name: "VSCode", icon: "vscode", themeDependent: false },
+  ],
+};
