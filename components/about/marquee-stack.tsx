@@ -21,6 +21,7 @@ const CHIPS: Chip[] = [
   { label: "Vercel", slug: "vercel", bg: "#0a0a0a", fg: "#ffffff" },
   { label: "Google Ads", slug: "googleads", bg: "#4285F4", fg: "#ffffff" },
   { label: "WordPress", slug: "wordpress", bg: "#21759B", fg: "#ffffff" },
+  { label: "Elementor", slug: "elementor", bg: "#92003B", fg: "#ffffff" },
   { label: "Tailwind CSS", slug: "tailwindcss", bg: "#2BBCF5", fg: "#ffffff" },
   { label: "WooCommerce", slug: "woocommerce", bg: "#96588A", fg: "#ffffff" },
   { label: "Python", slug: "python", bg: "#3776AB", fg: "#ffffff" },
@@ -29,14 +30,23 @@ const CHIPS: Chip[] = [
   { label: "Business Profile", slug: "googlemaps", bg: "#4285F4", fg: "#ffffff" },
   { label: "LinkedIn", slug: "linkedin", bg: "#0A66C2", fg: "#ffffff", iconUrl: "/linkedin.svg" },
   { label: "Angular", slug: "angular", bg: "#DD0031", fg: "#ffffff" },
+  { label: "AWS", slug: "aws", bg: "#252F3E", fg: "#FF9900" },
+  { label: "Azure", slug: "azure", bg: "#0089D6", fg: "#ffffff" },
+  { label: "GCP", slug: "gcp", bg: "#4285F4", fg: "#ffffff" },
+  { label: "Google Cloud", slug: "googlecloud", bg: "#4285F4", fg: "#ffffff" },
+  { label: "PostgreSQL", slug: "postgresql", bg: "#336791", fg: "#ffffff" },
+  { label: "FastAPI", slug: "fastapi", bg: "#009688", fg: "#ffffff" },
+  { label: "Flask", slug: "flask", bg: "#000000", fg: "#3BABC3" },
+  { label: "Pytest", slug: "pytest", bg: "#0A9EDC", fg: "#ffffff" },
+  { label: "GitHub Actions", slug: "githubactions", bg: "#2088FF", fg: "#ffffff" },
 ];
 
 const DEV_SLUGS = [
   "react", "nextdotjs", "shopify", "typescript", 
-  "cursor", "github", "vercel", "wordpress", "tailwindcss", 
-  "woocommerce", "python", "angular"
+  "cursor", "github", "vercel", "wordpress", "elementor", "tailwindcss", 
+  "woocommerce", "python", "angular", "aws", "azure", "gcp", "googlecloud",
+  "postgresql", "fastapi", "flask", "pytest", "githubactions"
 ];
-
 
 const ADS_SLUGS = [
   "meta", "googleads", "spotify", "linkedin", "googlemaps"
