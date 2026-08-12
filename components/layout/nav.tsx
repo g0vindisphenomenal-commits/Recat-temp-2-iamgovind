@@ -155,7 +155,7 @@ export function Nav(): ReactNode {
   return (
     <nav
       aria-label="Primary"
-      className="fixed left-1/2 top-6 z-50 -translate-x-1/2"
+      className="fixed left-1/2 top-4 sm:top-6 z-50 -translate-x-1/2"
     >
       <div className="flex items-center gap-1 rounded-full bg-background p-1.5 shadow-sm border border-foreground/8">
 
