@@ -55,7 +55,7 @@ export const ScratchToReveal: React.FC<ScratchToRevealProps> = ({
   useEffect(() => {
     initializeCanvas();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [gradientColors]);
+  }, [gradientColors, width, height]);
 
   useEffect(() => {
     setIsComplete(false);
@@ -116,11 +116,14 @@ export const ScratchToReveal: React.FC<ScratchToRevealProps> = ({
     const ctx = canvas?.getContext("2d");
     if (canvas && ctx) {
       const rect = canvas.getBoundingClientRect();
-      const x = clientX - rect.left + 16;
-      const y = clientY - rect.top + 16;
+      const scaleX = canvas.width / rect.width;
+      const scaleY = canvas.height / rect.height;
+      const x = (clientX - rect.left) * scaleX;
+      const y = (clientY - rect.top) * scaleY;
+
       ctx.globalCompositeOperation = "destination-out";
       ctx.beginPath();
-      ctx.arc(x, y, 30, 0, Math.PI * 2);
+      ctx.arc(x, y, 22, 0, Math.PI * 2);
       ctx.fill();
     }
   };
@@ -164,7 +167,7 @@ export const ScratchToReveal: React.FC<ScratchToRevealProps> = ({
 
   return (
     <motion.div
-      className={cn("relative select-none touch-none", className)}
+      className={cn("relative select-none touch-none overflow-hidden", className)}
       style={{
         width,
         height,
@@ -173,15 +176,20 @@ export const ScratchToReveal: React.FC<ScratchToRevealProps> = ({
       }}
       animate={controls}
     >
-      <canvas
-        ref={canvasRef}
-        width={width}
-        height={height}
-        className="absolute left-0 top-0"
-        onMouseDown={handleMouseDown}
-        onTouchStart={handleTouchStart}
-      ></canvas>
-      {children}
+      {/* Children (Secret GIF/content underneath canvas) */}
+      <div className="relative z-0 h-full w-full">{children}</div>
+
+      {/* Scratch Canvas (Top overlay layer) */}
+      {!isComplete && (
+        <canvas
+          ref={canvasRef}
+          width={width}
+          height={height}
+          className="absolute inset-0 z-10 h-full w-full"
+          onMouseDown={handleMouseDown}
+          onTouchStart={handleTouchStart}
+        />
+      )}
     </motion.div>
   );
 };
