@@ -109,13 +109,13 @@ function PolaroidCard({
         y: ty,
         rotate: photo.rotate,
       }}
-      className={`group relative ${photo.aspectClass} shrink-0 overflow-hidden rounded-2xl border-6 border-neutral-300/40 bg-white p-1.5 shadow-md transition-all duration-300 hover:z-20 hover:border-white hover:shadow-xl dark:border-white/15 dark:bg-neutral-900 dark:hover:border-white/30`}
+      className={`group relative ${photo.aspectClass} shrink-0 overflow-hidden rounded-2xl bg-white p-2 border border-black/10 shadow-lg transition-all duration-300 hover:z-20 hover:scale-105 hover:shadow-2xl dark:bg-neutral-900 dark:border-white/10`}
     >
       <div className="relative h-full w-full overflow-hidden rounded-xl bg-neutral-100 dark:bg-neutral-800">
         <img
           src={photo.src}
           alt={photo.caption}
-          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
           draggable={false}
         />
       </div>
