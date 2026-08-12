@@ -9,13 +9,14 @@ type Polaroid = {
   id: string;
   rotate: number;
   image?: string;
+  video?: string;
 };
 
 const PHOTOS: Polaroid[] = [
   { id: "a", rotate: -8, image: "/polaroid-govind.jpg" },
   { id: "b", rotate: 6, image: "/polaroid-pixel.jpg" },
   { id: "c", rotate: -4, image: "/polaroid-dark.jpg" },
-  { id: "d", rotate: 7 },
+  { id: "d", rotate: 7, video: "/polaroid-video.3gp" },
   { id: "e", rotate: -6 },
   { id: "f", rotate: 5 },
 ];
@@ -75,7 +76,18 @@ function PolaroidCard({
       }}
       className="relative aspect-[3/4] w-[clamp(6rem,11vw,9rem)] shrink-0 overflow-hidden rounded-2xl border-6 border-neutral-300/40 bg-white p-1.5 dark:border-white/15 dark:bg-neutral-900"
     >
-      {photo.image ? (
+      {photo.video ? (
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="relative h-full w-full overflow-hidden rounded-xl object-cover"
+        >
+          <source src={photo.video} type="video/3gpp" />
+          <source src={photo.video} type="video/mp4" />
+        </video>
+      ) : photo.image ? (
         <img
           src={photo.image}
           alt="Polaroid photo"
