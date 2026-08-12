@@ -247,8 +247,8 @@ const EngagementTile = ({
         <div className="flex items-center gap-3">
           <div className="relative h-11 w-11 shrink-0">
             <Image
-              src="/govind.jpg"
-              alt="Advertising avatar"
+              src="/govind-ghibli-hero.png"
+              alt="Govind Ghibli avatar"
               width={44}
               height={44}
               className="h-11 w-11 rounded-xl object-cover border border-foreground/10"

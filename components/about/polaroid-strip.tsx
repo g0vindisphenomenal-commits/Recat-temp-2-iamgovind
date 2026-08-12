@@ -11,7 +11,7 @@ type Polaroid = {
 };
 
 const PHOTOS: Polaroid[] = [
-  { id: "a", rotate: -8, src: "/govind-ghibli.png", caption: "Govind Ghibli Anime" },
+  { id: "a", rotate: -8, src: "/govind-ghibli-hero.png", caption: "Govind Ghibli Anime" },
   { id: "b", rotate: 6, src: "/cybertruckfilms-actual.png", caption: "CyberTruck Films" },
   { id: "c", rotate: -4, src: "/marhabahospitality.png", caption: "Marhaba Hospitality" },
   { id: "d", rotate: 7, src: "/microbotit.png", caption: "Microbot IT" },
