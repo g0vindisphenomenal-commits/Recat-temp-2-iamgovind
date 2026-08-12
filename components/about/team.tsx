@@ -3,6 +3,7 @@
 import { ArrowUpRight, Paperclip, Send, Check } from "lucide-react";
 import { motion } from "motion/react";
 import { useState, type ReactNode } from "react";
+import { BlurFade } from "@/components/ui/blur-fade";
 
 type Member = {
   name: string;
@@ -124,53 +125,59 @@ export function Team(): ReactNode {
       <div className="border-foreground/5 bg-foreground/1.5 dark:bg-foreground/3 flex-1 rounded-4xl border p-4 sm:p-6 flex flex-col justify-between">
         <div className="flex flex-col gap-4">
           <ul className="flex flex-col gap-2">
-            {MEMBERS.map((member) => (
-              <motion.li
+            {MEMBERS.map((member, index) => (
+              <BlurFade
                 key={member.href}
-                whileHover={{ y: -2, scale: 1.012 }}
-                transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                className="group relative list-none"
+                delay={0.6 + index * 0.08}
+                duration={0.45}
+                inView={false}
               >
-                <a
-                  href={member.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-background border-foreground/5 flex items-center gap-3.5 rounded-3xl border p-2 w-full transition-all duration-300 hover:bg-foreground/2 hover:border-foreground/12 hover:shadow-[0_8px_30px_rgb(0,0,0,0.03)] focus-ring"
+                <motion.li
+                  whileHover={{ y: -2, scale: 1.012 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                  className="group relative list-none"
                 >
-                  <span
-                    className="ring-foreground/8 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-white font-bold text-md select-none transition-transform duration-300 group-hover:scale-105 overflow-hidden"
-                    aria-hidden="true"
-                    style={{ backgroundColor: member.color }}
+                  <a
+                    href={member.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-background border-foreground/5 flex items-center gap-3.5 rounded-3xl border p-2 w-full transition-all duration-300 hover:bg-foreground/2 hover:border-foreground/12 hover:shadow-[0_8px_30px_rgb(0,0,0,0.03)] focus-ring"
                   >
-                    {member.avatarUrl ? (
-                      <img
-                        src={member.avatarUrl}
-                        alt={member.name}
-                        width={40}
-                        height={40}
-                        className="h-full w-full object-cover"
-                        draggable={false}
-                      />
-                    ) : (
-                      member.initials
-                    )}
-                  </span>
-                  <div className="flex flex-col min-w-0">
-                    <span className="text-foreground text-[15px] font-semibold tracking-tight truncate group-hover:text-foreground">
-                      {member.name}
+                    <span
+                      className="ring-foreground/8 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-white font-bold text-md select-none transition-transform duration-300 group-hover:scale-105 overflow-hidden"
+                      aria-hidden="true"
+                      style={{ backgroundColor: member.color }}
+                    >
+                      {member.avatarUrl ? (
+                        <img
+                          src={member.avatarUrl}
+                          alt={member.name}
+                          width={40}
+                          height={40}
+                          className="h-full w-full object-cover"
+                          draggable={false}
+                        />
+                      ) : (
+                        member.initials
+                      )}
                     </span>
-                    <span className="text-foreground/65 mt-0.5 text-[12px] tracking-tight truncate">
-                      {member.role}
+                    <div className="flex flex-col min-w-0">
+                      <span className="text-foreground text-[15px] font-semibold tracking-tight truncate group-hover:text-foreground">
+                        {member.name}
+                      </span>
+                      <span className="text-foreground/65 mt-0.5 text-[12px] tracking-tight truncate">
+                        {member.role}
+                      </span>
+                    </div>
+                    <span
+                      className="ml-auto text-[11px] font-medium text-foreground/50 transition-colors group-hover:text-foreground border border-foreground/8 hover:bg-foreground/5 rounded-xl px-2.5 py-1 inline-flex items-center gap-0.5"
+                    >
+                      Visit
+                      <ArrowUpRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </span>
-                  </div>
-                  <span
-                    className="ml-auto text-[11px] font-medium text-foreground/50 transition-colors group-hover:text-foreground border border-foreground/8 hover:bg-foreground/5 rounded-xl px-2.5 py-1 inline-flex items-center gap-0.5"
-                  >
-                    Visit
-                    <ArrowUpRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </span>
-                </a>
-              </motion.li>
+                  </a>
+                </motion.li>
+              </BlurFade>
             ))}
           </ul>
           <p className="text-[14px] leading-normal tracking-tight text-foreground/60 px-1">

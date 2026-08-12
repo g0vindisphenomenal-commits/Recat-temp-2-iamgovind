@@ -17,6 +17,7 @@ import { CustomCursor } from "@/components/ui/custom-cursor";
 
 export default function Dashboard() {
   const [isActive, setIsActive] = useState(true);
+  const [isMarqueePaused, setIsMarqueePaused] = useState(false);
   const dashboardIconClass = "h-3.5 w-3.5 text-foreground";
 
   return (
@@ -29,14 +30,20 @@ export default function Dashboard() {
           icon={<IconCode className={dashboardIconClass} />}
           title="Development"
           transitionDuration="100ms"
+          onMouseEnter={() => setIsMarqueePaused(true)}
+          onMouseLeave={() => setIsMarqueePaused(false)}
         >
-          <ToolsMarquee paused={!isActive} />
+          <ToolsMarquee paused={!isActive || isMarqueePaused} />
         </GridItem>
         <GridItem
           area="engagement"
           transitionDuration="150ms"
         >
-          <EngagementTile isActive={isActive} setIsActive={setIsActive} />
+          <EngagementTile
+            isActive={isActive}
+            setIsActive={setIsActive}
+            isMarqueePaused={isMarqueePaused}
+          />
         </GridItem>
       </ul>
     </div>
@@ -51,9 +58,21 @@ interface GridItemProps {
   transitionDuration?: string;
   tooltip?: string;
   cursorEmoji?: string;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
 }
 
-const GridItem = ({ area, icon, title, children, transitionDuration = "300ms", tooltip, cursorEmoji }: GridItemProps) => {
+const GridItem = ({
+  area,
+  icon,
+  title,
+  children,
+  transitionDuration = "300ms",
+  tooltip,
+  cursorEmoji,
+  onMouseEnter,
+  onMouseLeave,
+}: GridItemProps) => {
   const [showTooltip, setShowTooltip] = useState(false);
   const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
 
@@ -82,6 +101,8 @@ const GridItem = ({ area, icon, title, children, transitionDuration = "300ms", t
   const content = (
     <li
       data-cursor-emoji={cursorEmoji}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
       className="min-h-[2rem] w-full list-none transition-all"
       style={{
         gridArea: area,
@@ -213,9 +234,11 @@ const ToolsMarquee = ({ paused = false }: { paused?: boolean }) => {
 const EngagementTile = ({
   isActive,
   setIsActive,
+  isMarqueePaused = false,
 }: {
   isActive: boolean;
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
+  isMarqueePaused?: boolean;
 }) => {
 
   return (
@@ -231,7 +254,12 @@ const EngagementTile = ({
               className="h-11 w-11 rounded-xl object-cover border border-foreground/10"
             />
             <span className="absolute -bottom-0.5 -right-0.5 flex h-3.5 w-3.5 items-center justify-center">
-              {isActive ? (
+              {isMarqueePaused ? (
+                <>
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75" />
+                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-amber-500" />
+                </>
+              ) : isActive ? (
                 <>
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                   <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
@@ -246,7 +274,7 @@ const EngagementTile = ({
               Advertising
             </span>
             <span className="text-xs font-medium text-muted-foreground flex items-center gap-1.5">
-              {isActive ? "Active Engagement" : "Off Engagement"}
+              {isMarqueePaused ? "Paused" : isActive ? "Active Engagement" : "Off Engagement"}
             </span>
           </div>
         </div>
@@ -273,7 +301,13 @@ const EngagementTile = ({
 
         <div className="flex flex-col gap-1 border-l border-foreground/10 pl-3 sm:pl-5 pr-2 sm:pr-4">
           <span className="text-xl sm:text-2xl font-bold tracking-tight text-foreground">
-            2.11
+            {(() => {
+              const startDate = new Date("2024-05-01");
+              const now = new Date();
+              const diffMs = now.getTime() - startDate.getTime();
+              const years = Math.floor(diffMs / (1000 * 60 * 60 * 24 * 365.25));
+              return `${Math.max(2, years)}+`;
+            })()}
           </span>
           <span className="text-xs text-muted-foreground tracking-tight">
             Years of Expertise

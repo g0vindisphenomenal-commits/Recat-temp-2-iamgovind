@@ -3,6 +3,7 @@
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useState, type ReactNode } from "react";
+import { BlurFade } from "@/components/ui/blur-fade";
 
 type Entry = {
   company: string;
@@ -48,21 +49,21 @@ export function Experience(): ReactNode {
         Experience
       </h3>
       <div
-        className={`border-foreground/5 bg-foreground/2 dark:bg-foreground/5 relative overflow-hidden rounded-4xl border px-2 pt-2 sm:px-4 sm:pt-4 ${
-          open ? "pb-2 sm:pb-4" : "pb-0"
+        className={`border-foreground/5 bg-foreground/2 dark:bg-foreground/5 relative overflow-hidden rounded-4xl border p-2 sm:p-4 ${
+          hiddenCount > 0 && !open ? "pb-0" : ""
         }`}
       >
         <motion.div
           className="relative"
           initial={false}
           animate={{
-            height: open ? "auto" : collapsedHeight,
+            height: hiddenCount > 0 && !open ? collapsedHeight : "auto",
           }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           style={{ overflow: "hidden" }}
         >
           <ul className="flex flex-col gap-2">
-            {ENTRIES.map((entry) => {
+            {ENTRIES.map((entry, index) => {
               const cardContent = (
                 <div className="flex items-center gap-4 w-full">
                   <CompanyLogo entry={entry} />
@@ -86,38 +87,39 @@ export function Experience(): ReactNode {
               );
 
               return (
-                <motion.li
-                  key={`${entry.company}-${entry.period}`}
-                  whileHover={{ y: -2, scale: 1.012 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                  className="group relative list-none"
-                >
-                  {entry.href ? (
-                    <a
-                      href={entry.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-background border-foreground/5 flex items-center gap-4 rounded-3xl border p-2 w-full transition-all duration-300 hover:bg-foreground/2 hover:border-foreground/12 hover:shadow-[0_8px_30px_rgb(0,0,0,0.03)] focus-ring"
-                      style={{ minHeight: ROW_HEIGHT }}
-                    >
-                      {cardContent}
-                    </a>
-                  ) : (
-                    <div
-                      className="bg-background border-foreground/5 flex items-center gap-4 rounded-3xl border p-2 w-full transition-all duration-300"
-                      style={{ minHeight: ROW_HEIGHT }}
-                    >
-                      {cardContent}
-                    </div>
-                  )}
-                </motion.li>
+                <BlurFade key={`${entry.company}-${entry.period}`} delay={0.05 * index} inView>
+                  <motion.li
+                    whileHover={{ y: -2, scale: 1.012 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                    className="group relative list-none"
+                  >
+                    {entry.href ? (
+                      <a
+                        href={entry.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-background border-foreground/5 flex items-center gap-4 rounded-3xl border p-2 w-full transition-all duration-300 hover:bg-foreground/2 hover:border-foreground/12 hover:shadow-[0_8px_30px_rgb(0,0,0,0.03)] focus-ring"
+                        style={{ minHeight: ROW_HEIGHT }}
+                      >
+                        {cardContent}
+                      </a>
+                    ) : (
+                      <div
+                        className="bg-background border-foreground/5 flex items-center gap-4 rounded-3xl border p-2 w-full transition-all duration-300"
+                        style={{ minHeight: ROW_HEIGHT }}
+                      >
+                        {cardContent}
+                      </div>
+                    )}
+                  </motion.li>
+                </BlurFade>
               );
             })}
           </ul>
         </motion.div>
 
         <AnimatePresence>
-          {!open && (
+          {hiddenCount > 0 && !open && (
             <motion.div
               key="fade"
               initial={{ opacity: 0 }}

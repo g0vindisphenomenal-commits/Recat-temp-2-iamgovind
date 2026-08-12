@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { BlurFade } from "@/components/ui/blur-fade";
 
 const SKILLS = [
   "Software Engineering",
@@ -22,13 +23,14 @@ export function Skills(): ReactNode {
       </h3>
       <div className="rounded-4xl border border-foreground/5 bg-foreground/2 p-2 sm:p-4 dark:bg-foreground/5">
         <div className="flex flex-wrap gap-3">
-          {SKILLS.map((skill) => (
-            <span
-              key={skill}
-              className="rounded-full border border-foreground/8 bg-background px-4 py-2 text-[14px] tracking-tight text-foreground/85 sm:text-[15px]"
-            >
-              {skill}
-            </span>
+          {SKILLS.map((skill, index) => (
+            <BlurFade key={skill} delay={0.03 * index} inView>
+              <span
+                className="rounded-full border border-foreground/8 bg-background px-4 py-2 text-[14px] tracking-tight text-foreground/85 sm:text-[15px] inline-block"
+              >
+                {skill}
+              </span>
+            </BlurFade>
           ))}
         </div>
       </div>
