@@ -8,11 +8,12 @@ import { DottedPattern } from "@/components/ui/dotted-pattern";
 type Polaroid = {
   id: string;
   rotate: number;
+  image?: string;
 };
 
 const PHOTOS: Polaroid[] = [
-  { id: "a", rotate: -8 },
-  { id: "b", rotate: 6 },
+  { id: "a", rotate: -8, image: "/polaroid-govind.jpg" },
+  { id: "b", rotate: 6, image: "/polaroid-pixel.jpg" },
   { id: "c", rotate: -4 },
   { id: "d", rotate: 7 },
   { id: "e", rotate: -6 },
@@ -74,7 +75,16 @@ function PolaroidCard({
       }}
       className="relative aspect-[3/4] w-[clamp(6rem,11vw,9rem)] shrink-0 overflow-hidden rounded-2xl border-6 border-neutral-300/40 bg-white p-1.5 dark:border-white/15 dark:bg-neutral-900"
     >
-      <DottedPattern className="relative h-full w-full overflow-hidden rounded-xl" />
+      {photo.image ? (
+        <img
+          src={photo.image}
+          alt="Polaroid photo"
+          className="relative h-full w-full overflow-hidden rounded-xl object-cover"
+          draggable={false}
+        />
+      ) : (
+        <DottedPattern className="relative h-full w-full overflow-hidden rounded-xl" />
+      )}
     </motion.div>
   );
 }

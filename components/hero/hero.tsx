@@ -5,7 +5,7 @@ import { FadeIn, ScaleUnblur } from "@/components/ui/motion-primitives";
 import { PortraitMorph } from "./portrait-morph";
 
 const PORTRAIT_SRC = "/govind-ghibli-hero.png";
-const PORTRAIT_HOVER_SRC = "/govind-ghibli-hero.png";
+const PORTRAIT_HOVER_SRC = "/govind-pixel-hero.jpg";
 
 export function Hero(): ReactNode {
   return (
