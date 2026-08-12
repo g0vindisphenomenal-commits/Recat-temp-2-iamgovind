@@ -44,22 +44,41 @@ function LocationPolaroidCard(): ReactNode {
   } | null>(null);
 
   useEffect(() => {
-    fetch("https://ip-api.com/json/?fields=city,country,countryCode,status")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.status === "success" && data.city && data.country) {
+    async function fetchLocation() {
+      try {
+        const res = await fetch("https://ipwho.is/");
+        const data = await res.json();
+        if (data.success && data.city && data.country) {
           setLocationInfo({
             city: data.city,
             country: data.country,
-            code: data.countryCode || "IN",
+            code: data.country_code || "IN",
           });
-        } else {
-          setLocationInfo({ city: "Trivandrum", country: "India", code: "IN" });
+          return;
         }
-      })
-      .catch(() => {
-        setLocationInfo({ city: "Trivandrum", country: "India", code: "IN" });
-      });
+      } catch {
+        // Fallback to ipapi.co if ipwho.is fails
+      }
+
+      try {
+        const res = await fetch("https://ipapi.co/json/");
+        const data = await res.json();
+        if (data.city && data.country_name) {
+          setLocationInfo({
+            city: data.city,
+            country: data.country_name,
+            code: data.country_code || "IN",
+          });
+          return;
+        }
+      } catch {
+        // Final fallback if network fails
+      }
+
+      setLocationInfo({ city: "Trivandrum", country: "India", code: "IN" });
+    }
+
+    void fetchLocation();
   }, []);
 
   const flag = locationInfo ? getFlagEmoji(locationInfo.code) : "📍";
