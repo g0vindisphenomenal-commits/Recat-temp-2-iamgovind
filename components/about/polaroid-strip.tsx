@@ -95,30 +95,30 @@ function LocationPolaroidCard(): ReactNode {
       />
 
       {/* Top Header Badge */}
-      <div className="relative z-10 flex items-center gap-1.5 pt-1">
-        <span className="relative flex h-2 w-2">
+      <div className="relative z-10 flex items-center gap-1.5 pt-1 whitespace-nowrap shrink-0">
+        <span className="relative flex h-2 w-2 shrink-0">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
           <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
         </span>
-        <span className="text-[9px] sm:text-[10px] font-semibold tracking-wider uppercase text-emerald-400">
-          Your Location
+        <span className="text-[9px] sm:text-[10px] font-semibold tracking-wider uppercase text-emerald-400 whitespace-nowrap">
+          ur location
         </span>
       </div>
 
       {/* Center Location Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center my-auto py-1">
+      <div className="relative z-10 flex flex-col items-center justify-center my-auto py-1 w-full overflow-hidden">
         <span className="text-2xl sm:text-3xl mb-0.5 drop-shadow-sm">{flag}</span>
-        <h4 className="text-xs sm:text-sm font-bold tracking-tight text-white line-clamp-1">
+        <h4 className="text-xs sm:text-sm font-bold tracking-tight text-white whitespace-nowrap truncate w-full px-1">
           {locationInfo ? locationInfo.city : "Detecting..."}
         </h4>
-        <p className="text-[10px] font-medium text-neutral-400 tracking-tight line-clamp-1">
+        <p className="text-[10px] font-medium text-neutral-400 tracking-tight whitespace-nowrap truncate w-full px-1">
           {locationInfo ? locationInfo.country : "Location"}
         </p>
       </div>
 
       {/* Bottom Subtext */}
-      <div className="relative z-10 w-full pt-1 border-t border-white/10">
-        <span className="text-[9px] font-medium text-neutral-400 tracking-tight block">
+      <div className="relative z-10 w-full pt-1 border-t border-white/10 shrink-0">
+        <span className="text-[9px] font-medium text-neutral-400 tracking-tight block whitespace-nowrap">
           Welcome! 👋
         </span>
       </div>
