@@ -165,7 +165,7 @@ function ProjectCard({
       delay={Math.min(index * 0.06, 0.3)}
       className="mb-6 break-inside-avoid md:mb-7"
     >
-      <article className="project-card group flex h-full flex-col gap-4 rounded-3xl border border-foreground/8 bg-background p-3 sm:p-3.5">
+      <article className="project-card group flex h-full flex-col gap-4 rounded-3xl border border-foreground/8 bg-background p-3 sm:p-3.5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-foreground/15">
         <header className="flex items-center justify-between gap-2.5 px-1 pt-2">
           <div className="flex items-center gap-2.5 min-w-0">
             <span className="border-foreground/10 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border bg-background">
@@ -199,7 +199,7 @@ function ProjectCard({
               alt={project.imageAlt}
               fill
               sizes="(min-width: 1024px) 540px, (min-width: 768px) 45vw, 100vw"
-              className="object-cover"
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
               priority={index < 2}
             />
           </div>
