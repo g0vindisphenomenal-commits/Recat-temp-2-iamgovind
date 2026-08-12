@@ -29,7 +29,7 @@ export function Hero(): ReactNode {
             </h1>
 
             <p className="max-w-xl text-[20px] sm:text-[22px] leading-[1.4] tracking-tight text-foreground/65">
-              As an independent specialist, I am committed to staying at the forefront of digital marketing trends and utilizing cutting-edge tools to enhance brand visibility, drive engagement, and build high-performance web applications.
+              Digital marketer &amp; web developer driving traffic &amp; sales.
             </p>
 
             <HeroCtas />

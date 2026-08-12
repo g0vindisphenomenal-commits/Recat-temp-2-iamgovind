@@ -15,9 +15,18 @@ import { useTheme } from "next-themes";
 import { SpotlightGlow } from "@/components/ui/spotlight-glow";
 import { CustomCursor } from "@/components/ui/custom-cursor";
 
-export default function Dashboard() {
-  const [isActive, setIsActive] = useState(true);
-  const [isMarqueePaused, setIsMarqueePaused] = useState(false);
+interface DashboardProps {
+  isActive?: boolean;
+  setIsActive?: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function Dashboard({
+  isActive: externalIsActive,
+  setIsActive: externalSetIsActive,
+}: DashboardProps = {}) {
+  const [internalIsActive, setInternalIsActive] = useState(true);
+  const isActive = externalIsActive ?? internalIsActive;
+  const setIsActive = externalSetIsActive ?? setInternalIsActive;
   const dashboardIconClass = "h-3.5 w-3.5 text-foreground";
 
   return (
@@ -30,10 +39,8 @@ export default function Dashboard() {
           icon={<IconCode className={dashboardIconClass} />}
           title="Development"
           transitionDuration="100ms"
-          onMouseEnter={() => setIsMarqueePaused(true)}
-          onMouseLeave={() => setIsMarqueePaused(false)}
         >
-          <ToolsMarquee paused={!isActive || isMarqueePaused} />
+          <ToolsMarquee paused={!isActive} />
         </GridItem>
         <GridItem
           area="engagement"
@@ -42,7 +49,6 @@ export default function Dashboard() {
           <EngagementTile
             isActive={isActive}
             setIsActive={setIsActive}
-            isMarqueePaused={isMarqueePaused}
           />
         </GridItem>
       </ul>
@@ -220,7 +226,7 @@ const ToolsMarquee = ({ paused = false }: { paused?: boolean }) => {
     <div className="relative overflow-hidden">
       <div className="fade-mask-left transition-all duration-400" />
       <div className="fade-mask-right transition-all duration-400" />
-      <Marquee pauseOnHover paused={paused} repeat={4} className="[--duration:25s] [--gap:1.5rem]">
+      <Marquee pauseOnHover pauseDurationOnHoverMs={5000} paused={paused} repeat={4} className="[--duration:25s] [--gap:1.5rem]">
         <div className="flex items-center gap-6">
           {processedToolsData.map(({ name, icon }) => (
             <Tool key={name} name={name} icon={icon} />
@@ -234,11 +240,9 @@ const ToolsMarquee = ({ paused = false }: { paused?: boolean }) => {
 const EngagementTile = ({
   isActive,
   setIsActive,
-  isMarqueePaused = false,
 }: {
   isActive: boolean;
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
-  isMarqueePaused?: boolean;
 }) => {
 
   return (
@@ -254,12 +258,7 @@ const EngagementTile = ({
               className="h-11 w-11 rounded-xl object-cover border border-foreground/10"
             />
             <span className="absolute -bottom-0.5 -right-0.5 flex h-3.5 w-3.5 items-center justify-center">
-              {isMarqueePaused ? (
-                <>
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75" />
-                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-amber-500" />
-                </>
-              ) : isActive ? (
+              {isActive ? (
                 <>
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                   <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
@@ -274,7 +273,7 @@ const EngagementTile = ({
               Advertising
             </span>
             <span className="text-xs font-medium text-muted-foreground flex items-center gap-1.5">
-              {isMarqueePaused ? "Paused" : isActive ? "Active Engagement" : "Off Engagement"}
+              {isActive ? "Active Engagement" : "Off Engagement"}
             </span>
           </div>
         </div>

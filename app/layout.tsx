@@ -5,7 +5,7 @@ import { Providers } from "@/components/layout/providers";
 import { SkipToContent } from "@/components/layout/skip-to-content";
 import { baseMetadata, siteConfig } from "@/lib/metadata";
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Geist, Geist_Mono } from "next/font/google";
+import { Fraunces, Geist, Geist_Mono, Pacifico } from "next/font/google";
 import type { ReactNode } from "react";
 import "./globals.css";
 
@@ -26,6 +26,12 @@ const fraunces = Fraunces({
   subsets: ["latin"],
   axes: ["opsz", "SOFT"],
   display: "swap",
+});
+
+const pacifico = Pacifico({
+  variable: "--font-script",
+  subsets: ["latin"],
+  weight: "400",
 });
 
 export const metadata: Metadata = baseMetadata;
@@ -96,7 +102,7 @@ export default function RootLayout({
           />
         </head>
         <body
-          className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} min-h-screen bg-background font-sans text-foreground antialiased`}
+          className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} ${pacifico.variable} min-h-screen bg-background font-sans text-foreground antialiased`}
         >
           <Providers>
             <div className="site-frame site-frame--top" aria-hidden="true" />

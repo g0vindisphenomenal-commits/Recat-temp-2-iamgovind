@@ -1,7 +1,7 @@
 import { ContactCard } from "@/components/contact/contact-card";
 import { Hero } from "@/components/hero/hero";
 import { Projects } from "@/components/projects/projects";
-import Dashboard from "@/components/dashboard/dashboard";
+import { HomeDashboardSection } from "@/components/dashboard/home-dashboard-section";
 import { createMetadata } from "@/lib/metadata";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
@@ -16,14 +16,13 @@ export const metadata: Metadata = createMetadata({
   image: "https://iamgovind.com/og-image.jpg",
 });
 
-
 export default function HomePage(): ReactNode {
   return (
     <main id="main-content" className="flex flex-1 flex-col gap-12 sm:gap-16">
-      <div className="flex flex-col gap-4 sm:gap-6">
+      <div className="flex flex-col gap-6 sm:gap-8">
         <Hero />
-        <section className="mx-auto w-full max-w-275 px-6 sm:px-10">
-          <Dashboard />
+        <section className="mx-auto flex w-full max-w-275 flex-col gap-8 px-6 sm:px-10">
+          <HomeDashboardSection />
         </section>
       </div>
       <Projects withHeadline viewMoreVisible />
@@ -32,4 +31,3 @@ export default function HomePage(): ReactNode {
     </main>
   );
 }
-
