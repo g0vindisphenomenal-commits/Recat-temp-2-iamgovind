@@ -3,20 +3,20 @@
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import { useRef, useSyncExternalStore, type ReactNode } from "react";
 
-import { DottedPattern } from "@/components/ui/dotted-pattern";
-
 type Polaroid = {
   id: string;
   rotate: number;
+  src: string;
+  caption: string;
 };
 
 const PHOTOS: Polaroid[] = [
-  { id: "a", rotate: -8 },
-  { id: "b", rotate: 6 },
-  { id: "c", rotate: -4 },
-  { id: "d", rotate: 7 },
-  { id: "e", rotate: -6 },
-  { id: "f", rotate: 5 },
+  { id: "a", rotate: -8, src: "/govind-ghibli.png", caption: "Govind Ghibli Anime" },
+  { id: "b", rotate: 6, src: "/cybertruckfilms-actual.png", caption: "CyberTruck Films" },
+  { id: "c", rotate: -4, src: "/marhabahospitality.png", caption: "Marhaba Hospitality" },
+  { id: "d", rotate: 7, src: "/microbotit.png", caption: "Microbot IT" },
+  { id: "e", rotate: -6, src: "/reshmihappyhome-actual.png", caption: "Reshmi Happy Home" },
+  { id: "f", rotate: 5, src: "/rijasrazak-actual.png", caption: "Rijas Razak" },
 ];
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -72,9 +72,16 @@ function PolaroidCard({
         y: ty,
         rotate: photo.rotate,
       }}
-      className="relative aspect-[3/4] w-[clamp(6rem,11vw,9rem)] shrink-0 overflow-hidden rounded-2xl border-6 border-neutral-300/40 bg-white p-1.5 dark:border-white/15 dark:bg-neutral-900"
+      className="group relative aspect-[3/4] w-[clamp(6rem,11vw,9rem)] shrink-0 overflow-hidden rounded-2xl border-6 border-neutral-300/40 bg-white p-1.5 shadow-md transition-all duration-300 hover:z-20 hover:border-white hover:shadow-xl dark:border-white/15 dark:bg-neutral-900 dark:hover:border-white/30"
     >
-      <DottedPattern className="relative h-full w-full overflow-hidden rounded-xl" />
+      <div className="relative h-full w-full overflow-hidden rounded-xl bg-neutral-100 dark:bg-neutral-800">
+        <img
+          src={photo.src}
+          alt={photo.caption}
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+          draggable={false}
+        />
+      </div>
     </motion.div>
   );
 }

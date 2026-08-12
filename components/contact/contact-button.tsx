@@ -102,7 +102,7 @@ export function ContactButton(): ReactNode {
                   </span>
                   <div className="flex flex-col min-w-0 flex-1">
                     <span className="text-sm font-semibold text-foreground flex items-center gap-1">
-                      Direct Phone Call
+                      Dialer
                       <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                     </span>
                     <span className="text-xs text-muted-foreground truncate">
