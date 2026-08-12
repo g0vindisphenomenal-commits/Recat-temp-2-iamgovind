@@ -8,6 +8,18 @@
     ],
     "cleanUrls": true,
     "trailingSlash": false,
+    "redirects": [
+      {
+        "source": "/digital-marketing-updates-today-wordpress",
+        "destination": "/blog",
+        "type": 301
+      },
+      {
+        "source": "/digital-marketing-updates-today-wordpress/",
+        "destination": "/blog",
+        "type": 301
+      }
+    ],
     "headers": [
       {
         "source": "**",
