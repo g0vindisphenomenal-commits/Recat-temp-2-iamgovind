@@ -7,7 +7,7 @@ import type { ReactNode } from "react";
 
 const PHONE_NUMBER = "9995513314";
 const WHATSAPP_URL = `https://wa.me/91${PHONE_NUMBER}`;
-const CALL_URL = `tel:${PHONE_NUMBER}`;
+const CALL_URL = `tel:+91${PHONE_NUMBER}`;
 
 export function ContactButton(): ReactNode {
   const [modalOpen, setModalOpen] = useState(false);
@@ -106,7 +106,7 @@ export function ContactButton(): ReactNode {
                       <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                     </span>
                     <span className="text-xs text-muted-foreground truncate">
-                      Open Dialer ({PHONE_NUMBER})
+                      +91 {PHONE_NUMBER}
                     </span>
                   </div>
                 </a>
