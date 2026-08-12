@@ -84,7 +84,7 @@ function LocationPolaroidCard(): ReactNode {
   const flag = locationInfo ? getFlagEmoji(locationInfo.code) : "📍";
 
   return (
-    <div className="relative h-full w-full overflow-hidden rounded-xl bg-neutral-950 p-2 text-white flex flex-col justify-between items-center text-center border border-white/10 select-none">
+    <div className="relative h-full w-full overflow-hidden rounded-xl bg-neutral-950 p-2 text-white flex flex-col items-center justify-center text-center border border-white/10 select-none">
       {/* Background Map Mesh Pattern */}
       <div
         className="absolute inset-0 opacity-20 pointer-events-none"
@@ -95,7 +95,7 @@ function LocationPolaroidCard(): ReactNode {
       />
 
       {/* Top Header Badge */}
-      <div className="relative z-10 flex items-center gap-1.5 pt-1 whitespace-nowrap shrink-0">
+      <div className="relative z-10 flex items-center gap-1.5 pt-1 whitespace-nowrap shrink-0 mb-auto">
         <span className="relative flex h-2 w-2 shrink-0">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
           <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
@@ -114,13 +114,6 @@ function LocationPolaroidCard(): ReactNode {
         <p className="text-[10px] font-medium text-neutral-400 tracking-tight whitespace-nowrap truncate w-full px-1">
           {locationInfo ? locationInfo.country : "Location"}
         </p>
-      </div>
-
-      {/* Bottom Subtext */}
-      <div className="relative z-10 w-full pt-1 border-t border-white/10 shrink-0">
-        <span className="text-[9px] font-medium text-neutral-400 tracking-tight block whitespace-nowrap">
-          Welcome! 👋
-        </span>
       </div>
     </div>
   );
