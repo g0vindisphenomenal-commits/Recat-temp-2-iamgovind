@@ -16,17 +16,17 @@ type Entry = {
 
 const ENTRIES: Entry[] = [
   {
-    company: "Freelance",
-    role: "Digital Marketer & Developer",
-    period: "2024 – Present",
-    logoUrl: "/freelance.png",
-  },
-  {
     company: "Think Hub Academy",
     role: "Digital Marketing Executive",
     period: "2 yrs 8 mos",
     logoUrl: "/thinkhub.png",
     href: "https://thinkhub.academy/",
+  },
+  {
+    company: "Freelance",
+    role: "Digital Marketer & Developer",
+    period: "2024 – Present",
+    logoUrl: "/freelance.png",
   },
 ];
 
