@@ -4,7 +4,6 @@ import { PolaroidStrip } from "@/components/about/polaroid-strip";
 import { Skills } from "@/components/about/skills";
 import { Stack } from "@/components/about/stack";
 import { Team } from "@/components/about/team";
-import { TeamPhotoGrid } from "@/components/about/team-photo-grid";
 import { ContactCard } from "@/components/contact/contact-card";
 import { FadeIn } from "@/components/ui/motion-primitives";
 import { createMetadata } from "@/lib/metadata";
@@ -26,22 +25,21 @@ export default function AboutPage(): ReactNode {
 
       <section className="mx-auto w-full max-w-[40rem] px-6 pt-20 pb-16 sm:px-10 sm:pt-28 sm:pb-24 lg:max-w-275 lg:grid lg:grid-cols-[1.4fr_1fr] lg:gap-8 lg:items-stretch">
         <FadeIn delay={0.5} className="h-full">
-          <div className="rounded-4xl border border-foreground/5 bg-foreground/1.5 p-8 sm:p-12 dark:bg-foreground/3 h-full flex flex-col justify-between">
-            <div>
-              <h1 className="font-serif text-[1.75rem] font-medium tracking-tight text-foreground sm:text-[2rem]">
-                Hello! I&rsquo;m <span className="border-b border-foreground/30 pb-0.5">Govind</span>.
-              </h1>
-              <div className="mt-8 space-y-6 text-[17px] leading-[1.7] tracking-tight text-foreground/75 sm:text-[18px]">
-                <p>
-                  A <strong className="font-semibold text-foreground">digital marketer and full-stack web developer</strong> based in Trivandrum, Kerala. I specialize in designing and engineering high-performance eCommerce platforms and dynamic web applications that combine creativity, speed, and strategic impact.
-                </p>
-                <p>
-                  Working alongside a specialized team of developers, growth marketers, and design collaborators, we focus on building intuitive web platforms and launching targeted performance campaigns that drive measurable ROI and elevate brand presence.
-                </p>
-              </div>
+          <div className="rounded-4xl border border-foreground/5 bg-foreground/1.5 p-8 sm:p-12 dark:bg-foreground/3 h-full flex flex-col justify-center">
+            <h1 className="font-serif text-[1.75rem] font-medium tracking-tight text-foreground sm:text-[2rem]">
+              Hello! I&rsquo;m <span className="border-b border-foreground/30 pb-0.5">Govind</span>.
+            </h1>
+            <div className="mt-8 space-y-6 text-[17px] leading-[1.7] tracking-tight text-foreground/75 sm:text-[18px]">
+              <p>
+                A <strong className="font-semibold text-foreground">digital marketer and full-stack web developer</strong> based in Trivandrum, Kerala. I specialize in designing and engineering high-performance eCommerce platforms and dynamic web applications that combine creativity, speed, and strategic impact.
+              </p>
+              <p>
+                Working alongside a specialized team of developers, growth marketers, and design collaborators, we focus on building intuitive web platforms and launching targeted performance campaigns that drive measurable ROI and elevate brand presence.
+              </p>
+              <p>
+                Whether optimizing conversion rates, scaling organic SEO, or engineering full-stack web platforms, our collaborative approach merges data-driven marketing with modern engineering to help businesses grow globally.
+              </p>
             </div>
-
-            <TeamPhotoGrid />
           </div>
         </FadeIn>
 
