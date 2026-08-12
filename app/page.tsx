@@ -2,14 +2,18 @@ import { ContactCard } from "@/components/contact/contact-card";
 import { Hero } from "@/components/hero/hero";
 import { Projects } from "@/components/projects/projects";
 import Dashboard from "@/components/dashboard/dashboard";
-import { createMetadata, siteConfig } from "@/lib/metadata";
+import { createMetadata } from "@/lib/metadata";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
 export const metadata: Metadata = createMetadata({
-  title: "iamgovind",
-  description: siteConfig.description,
+  title: "Govind B | Digital Marketer & Web Developer",
+  description:
+    "Digital marketer and web developer helping businesses grow through websites, SEO, advertising and digital solutions.",
+  ogDescription:
+    "Digital marketing, web development and growth solutions by Govind B.",
   path: "/",
+  image: "https://iamgovind.com/og-image.jpg",
 });
 
 

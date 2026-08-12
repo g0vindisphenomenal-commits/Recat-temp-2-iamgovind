@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 
 export const siteConfig = {
-  name: "iamgovind",
+  name: "Govind B",
   description:
-    "Portfolio of Govind B — Digital Marketer & Full-Stack Web Developer based in Trivandrum, Kerala.",
+    "Digital marketer and web developer helping businesses grow through websites, SEO, advertising and digital solutions.",
   url: "https://iamgovind.com",
-  ogImage: "/og-image.png",
+  ogImage: "https://iamgovind.com/og-image.jpg",
   creator: "@iamg0vind",
   authors: [
     {
@@ -31,8 +31,8 @@ export const siteConfig = {
 export const baseMetadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: "iamgovind",
-    template: "%s | iamgovind",
+    default: "Govind B | Digital Marketer & Web Developer",
+    template: "%s | Govind B",
   },
 
   description: siteConfig.description,
@@ -61,24 +61,26 @@ export const baseMetadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: siteConfig.url,
-    title: siteConfig.name,
-    description: siteConfig.description,
-    siteName: siteConfig.name,
+    url: "https://iamgovind.com/",
+    title: "Govind B | Digital Marketer & Web Developer",
+    description:
+      "Digital marketing, web development and growth solutions by Govind B.",
+    siteName: "Govind B",
     images: [
       {
-        url: siteConfig.ogImage,
+        url: "https://iamgovind.com/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: siteConfig.name,
+        alt: "Govind B - Digital Marketer & Web Developer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: siteConfig.name,
-    description: siteConfig.description,
-    images: [siteConfig.ogImage],
+    title: "Govind B | Digital Marketer & Web Developer",
+    description:
+      "Digital marketing, web development and growth solutions by Govind B.",
+    images: ["https://iamgovind.com/og-image.jpg"],
     creator: siteConfig.creator,
   },
   icons: {
@@ -99,12 +101,14 @@ export const baseMetadata: Metadata = {
 export function createMetadata({
   title,
   description,
+  ogDescription,
   path = "/",
   image,
   noIndex = false,
 }: {
   title?: string;
   description?: string;
+  ogDescription?: string;
   path?: string;
   image?: string;
   noIndex?: boolean;
@@ -113,27 +117,37 @@ export function createMetadata({
   const ogImage = image ?? siteConfig.ogImage;
 
   return {
-    title,
-    description,
+    title: title ?? "Govind B | Digital Marketer & Web Developer",
+    description: description ?? siteConfig.description,
     alternates: {
       canonical: path,
     },
     openGraph: {
-      title: title ?? siteConfig.name,
-      description: description ?? siteConfig.description,
+      type: "website",
       url,
+      title: title ?? "Govind B | Digital Marketer & Web Developer",
+      description:
+        ogDescription ??
+        description ??
+        "Digital marketing, web development and growth solutions by Govind B.",
+      siteName: "Govind B",
       images: [
         {
           url: ogImage,
           width: 1200,
           height: 630,
-          alt: title ?? siteConfig.name,
+          alt: title
+            ? `${title} - Govind B`
+            : "Govind B - Digital Marketer & Web Developer",
         },
       ],
     },
     twitter: {
-      title: title ?? siteConfig.name,
-      description: description ?? siteConfig.description,
+      title: title ?? "Govind B | Digital Marketer & Web Developer",
+      description:
+        ogDescription ??
+        description ??
+        "Digital marketing, web development and growth solutions by Govind B.",
       images: [ogImage],
     },
     ...(noIndex && {
