@@ -28,9 +28,8 @@ export function Hero(): ReactNode {
               <span className="block">web developer</span>
             </h1>
 
-            <p className="max-w-[34ch] text-[22px] leading-[1.4] tracking-tight text-foreground/65">
-              Independent specialist focused on growth strategies and digital
-              platforms that feel calm, considered, and quietly fast.
+            <p className="max-w-xl text-[20px] sm:text-[22px] leading-[1.4] tracking-tight text-foreground/65">
+              As an independent specialist, I am committed to staying at the forefront of digital marketing trends and utilizing cutting-edge tools to enhance brand visibility, drive engagement, and build high-performance web applications.
             </p>
 
             <HeroCtas />
