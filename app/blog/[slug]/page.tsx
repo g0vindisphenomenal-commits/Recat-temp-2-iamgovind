@@ -1,13 +1,21 @@
-import { ArrowLeft, Calendar, CheckCircle2, Clock, Sparkles } from "lucide-react";
+import {
+  IconArrowLeft,
+  IconArrowRight,
+  IconArrowUpRight,
+  IconCalendar,
+  IconCheck,
+  IconClock,
+  IconSparkles,
+} from "@tabler/icons-react";
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 
 import { ContactCard } from "@/components/contact/contact-card";
 import { CodeBlock } from "@/components/ui/code-block";
 import { FadeIn } from "@/components/ui/motion-primitives";
+import { TransitionLink } from "@/components/ui/transition-link";
 
 import { getAllPosts, getPostBySlug, getRelatedPosts } from "@/lib/blog-data";
 import type { BlogPost, BlogPostSection } from "@/lib/blog-data";
@@ -58,13 +66,13 @@ export default async function BlogPostPage({ params }: PageProps): Promise<React
       {/* Top Bar Navigation & Article Header */}
       <article className="mx-auto w-full max-w-275 px-6 pt-36 pb-12 sm:px-10 sm:pt-48 sm:pb-16">
         <FadeIn delay={0.1}>
-          <Link
+          <TransitionLink
             href="/blog"
             className="group inline-flex items-center gap-2 text-sm font-medium text-foreground/60 transition-colors hover:text-foreground mb-8"
           >
-            <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
+            <IconArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
             Back to insights
-          </Link>
+          </TransitionLink>
         </FadeIn>
 
         <FadeIn delay={0.2} className="flex flex-col gap-6">
@@ -76,18 +84,21 @@ export default async function BlogPostPage({ params }: PageProps): Promise<React
             <span className="text-foreground/30">•</span>
             <div className="flex items-center gap-4 text-xs text-foreground/50">
               <span className="inline-flex items-center gap-1.5">
-                <Calendar className="h-3.5 w-3.5" />
+                <IconCalendar className="h-3.5 w-3.5" />
                 {post.date}
               </span>
               <span className="inline-flex items-center gap-1.5">
-                <Clock className="h-3.5 w-3.5" />
+                <IconClock className="h-3.5 w-3.5" />
                 {post.readTime}
               </span>
             </div>
           </div>
 
           {/* Article Title */}
-          <h1 className="font-serif text-[2.5rem] font-medium leading-[1.08] tracking-tight text-foreground sm:text-[3.25rem] lg:text-[3.75rem]">
+          <h1
+            className="font-serif text-[2.5rem] font-medium leading-[1.08] tracking-tight text-foreground sm:text-[3.25rem] lg:text-[3.75rem]"
+            style={{ viewTransitionName: `post-title-${slug}` }}
+          >
             {post.title}
           </h1>
 
@@ -99,7 +110,10 @@ export default async function BlogPostPage({ params }: PageProps): Promise<React
 
         {/* Hero Featured Image */}
         <FadeIn delay={0.3} className="mt-10 mb-12 sm:mt-12 sm:mb-16">
-          <div className="relative aspect-[16/9] w-full overflow-hidden rounded-3xl border border-foreground/8 bg-foreground/5 shadow-sm ring-1 ring-foreground/5">
+          <div
+            className="relative aspect-[16/9] w-full overflow-hidden rounded-3xl border border-foreground/8 bg-foreground/5 shadow-sm ring-1 ring-foreground/5"
+            style={{ viewTransitionName: `post-image-${slug}` }}
+          >
             <Image
               src={post.image}
               alt={post.imageAlt}
@@ -147,13 +161,13 @@ export default async function BlogPostPage({ params }: PageProps): Promise<React
               <span className="font-serif text-lg font-medium text-foreground">Enjoyed this article?</span>
               <span className="text-xs text-foreground/60">Explore more marketing & development insights.</span>
             </div>
-            <Link
+            <TransitionLink
               href="/blog"
               className="inline-flex items-center gap-2 rounded-xl bg-foreground px-4 py-2.5 text-xs font-semibold text-background transition-opacity hover:opacity-90"
             >
               All Articles
-              <ArrowLeft className="h-3.5 w-3.5 rotate-180" />
-            </Link>
+              <IconArrowRight className="h-3.5 w-3.5" />
+            </TransitionLink>
           </div>
         </FadeIn>
       </article>
@@ -166,12 +180,12 @@ export default async function BlogPostPage({ params }: PageProps): Promise<React
               <h2 className="font-serif text-[1.75rem] font-medium tracking-tight text-foreground sm:text-[2rem]">
                 Continue reading
               </h2>
-              <Link
+              <TransitionLink
                 href="/blog"
                 className="text-xs font-semibold text-foreground/70 hover:text-foreground transition-colors"
               >
                 View all insights →
-              </Link>
+              </TransitionLink>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {relatedPosts.map((relPost, index) => (
@@ -219,14 +233,14 @@ function RenderSection({ section }: { section: BlogPostSection }): ReactNode {
       return (
         <div className="my-8 rounded-3xl border border-foreground/10 bg-foreground/2 p-6 sm:p-8 dark:bg-foreground/4">
           <div className="flex items-center gap-2 text-sm font-semibold text-foreground mb-4">
-            <Sparkles className="h-4 w-4 text-foreground/75" />
+            <IconSparkles className="h-4 w-4 text-foreground/75" />
             <span>{section.content || "Key Takeaways"}</span>
           </div>
           {section.items && (
             <ul className="space-y-3">
               {section.items.map((item, i) => (
                 <li key={i} className="flex items-start gap-3 text-[15px] sm:text-[16px] text-foreground/80 leading-snug">
-                  <CheckCircle2 className="h-4 w-4 text-foreground/60 shrink-0 mt-0.5" />
+                  <IconCheck className="h-4 w-4 text-foreground/60 shrink-0 mt-0.5" />
                   <span>{item}</span>
                 </li>
               ))}
@@ -245,7 +259,7 @@ function RenderSection({ section }: { section: BlogPostSection }): ReactNode {
 function RelatedCard({ post, index }: { post: BlogPost; index: number }): ReactNode {
   return (
     <FadeIn delay={index * 0.1}>
-      <Link href={`/blog/${post.id}`} className="block group h-full">
+      <TransitionLink href={`/blog/${post.id}`} className="block group h-full">
         <article className="project-card flex h-full cursor-pointer flex-col justify-between rounded-3xl border border-foreground/8 bg-background p-3 sm:p-3.5">
           <div className="flex flex-col gap-4">
             <header className="flex items-center justify-between px-1 pt-2">
@@ -257,7 +271,7 @@ function RelatedCard({ post, index }: { post: BlogPost; index: number }): ReactN
 
             <div
               className="project-card__image ring-foreground/5 relative w-full overflow-hidden rounded-2xl bg-foreground/5 ring-1"
-              style={{ aspectRatio: post.imageRatio }}
+              style={{ aspectRatio: post.imageRatio, viewTransitionName: `post-image-${post.id}` }}
             >
               <div className="project-card__image-inner">
                 <Image
@@ -271,7 +285,10 @@ function RelatedCard({ post, index }: { post: BlogPost; index: number }): ReactN
             </div>
 
             <div className="flex flex-col gap-2 px-1 pb-1">
-              <h3 className="text-[18px] font-medium leading-[1.25] tracking-tight text-foreground sm:text-[20px] group-hover:text-foreground/80 transition-colors">
+              <h3
+                className="text-[18px] font-medium leading-[1.25] tracking-tight text-foreground sm:text-[20px] group-hover:text-foreground/80 transition-colors"
+                style={{ viewTransitionName: `post-title-${post.id}` }}
+              >
                 {post.title}
               </h3>
             </div>
@@ -279,10 +296,10 @@ function RelatedCard({ post, index }: { post: BlogPost; index: number }): ReactN
 
           <div className="mt-4 flex items-center gap-1 px-1 pb-2 text-[13px] font-medium text-foreground group-hover:text-foreground/80 transition-colors">
             <span>Read article</span>
-            <ArrowLeft className="h-3.5 w-3.5 rotate-180" />
+            <IconArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
           </div>
         </article>
-      </Link>
+      </TransitionLink>
     </FadeIn>
   );
 }

@@ -46,6 +46,7 @@ html.dark {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -108,6 +109,7 @@ html[data-theme-anim="1"]::view-transition-new(root) {
   from {
     clip-path: circle(0px at var(--theme-cx) var(--theme-cy));
   }
+
   to {
     clip-path: circle(var(--theme-r) at var(--theme-cx) var(--theme-cy));
   }
@@ -171,6 +173,7 @@ html[data-theme-anim="1"]::view-transition-new(root) {
 }
 
 @media (max-width: 850px) {
+
   .site-frame,
   .site-corner {
     display: none;
@@ -225,6 +228,7 @@ html[data-theme-anim="1"]::view-transition-new(root) {
   from {
     transform: translateX(0);
   }
+
   to {
     transform: translateX(calc(-100% - var(--gap, 1rem)));
   }
@@ -254,27 +258,61 @@ html[data-theme-anim="1"]::view-transition-new(root) {
 }
 
 @keyframes wiggle {
-  0% { transform: rotate(-15deg); }
-  20% { transform: rotate(15deg); }
-  40% { transform: rotate(-10deg); }
-  60% { transform: rotate(10deg); }
-  80% { transform: rotate(-5deg); }
-  100% { transform: rotate(0deg); }
+  0% {
+    transform: rotate(-15deg);
+  }
+
+  20% {
+    transform: rotate(15deg);
+  }
+
+  40% {
+    transform: rotate(-10deg);
+  }
+
+  60% {
+    transform: rotate(10deg);
+  }
+
+  80% {
+    transform: rotate(-5deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 @keyframes sound-wave {
-  0% { transform: scaleY(0.3); }
-  100% { transform: scaleY(1); }
+  0% {
+    transform: scaleY(0.3);
+  }
+
+  100% {
+    transform: scaleY(1);
+  }
 }
 
 @keyframes spotlight {
-  0% { opacity: 0; transform: translate(-72%, -62%) scale(0.5); }
-  100% { opacity: 1; transform: translate(-50%, -40%) scale(1); }
+  0% {
+    opacity: 0;
+    transform: translate(-72%, -62%) scale(0.5);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -40%) scale(1);
+  }
 }
 
 @keyframes marquee-vertical {
-  from { transform: translateY(0); }
-  to { transform: translateY(calc(-100% - var(--gap))); }
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(calc(-100% - var(--gap)));
+  }
 }
 
 /* Fade masks for marquee edges */
@@ -299,4 +337,3 @@ html[data-theme-anim="1"]::view-transition-new(root) {
   z-index: 10;
   pointer-events: none;
 }
-

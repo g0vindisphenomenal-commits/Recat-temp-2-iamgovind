@@ -1,3 +1,4 @@
+import { ViewTransitions } from "next-view-transitions";
 import { Nav } from "@/components/layout/nav";
 import { PageBackdrop } from "@/components/layout/page-backdrop";
 import { Providers } from "@/components/layout/providers";
@@ -80,38 +81,40 @@ export default function RootLayout({
   children: ReactNode;
 }>): ReactNode {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <link
-          rel="alternate"
-          type="application/rss+xml"
-          href={`${siteConfig.url}/feed.xml`}
-          title={`${siteConfig.name} - RSS Feed`}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
-        />
-      </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} min-h-screen bg-background font-sans text-foreground antialiased`}
-      >
-        <Providers>
-          <div className="site-frame site-frame--top" aria-hidden="true" />
-          <div className="site-frame site-frame--left" aria-hidden="true" />
-          <div className="site-frame site-frame--right" aria-hidden="true" />
-          <svg className="site-corner site-corner--top-left" width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M5.50871e-06 0C-0.00788227 37.3001 8.99616 50.0116 50 50H5.50871e-06V0Z" fill="currentColor"/>
-          </svg>
-          <svg className="site-corner site-corner--top-right" width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M5.50871e-06 0C-0.00788227 37.3001 8.99616 50.0116 50 50H5.50871e-06V0Z" fill="currentColor"/>
-          </svg>
-          <SkipToContent />
-          <PageBackdrop />
-          <Nav />
-          {children}
-        </Providers>
-      </body>
-    </html>
+    <ViewTransitions>
+      <html lang="en" suppressHydrationWarning>
+        <head>
+          <link
+            rel="alternate"
+            type="application/rss+xml"
+            href={`${siteConfig.url}/feed.xml`}
+            title={`${siteConfig.name} - RSS Feed`}
+          />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
+          />
+        </head>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} min-h-screen bg-background font-sans text-foreground antialiased`}
+        >
+          <Providers>
+            <div className="site-frame site-frame--top" aria-hidden="true" />
+            <div className="site-frame site-frame--left" aria-hidden="true" />
+            <div className="site-frame site-frame--right" aria-hidden="true" />
+            <svg className="site-corner site-corner--top-left" width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M5.50871e-06 0C-0.00788227 37.3001 8.99616 50.0116 50 50H5.50871e-06V0Z" fill="currentColor" />
+            </svg>
+            <svg className="site-corner site-corner--top-right" width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M5.50871e-06 0C-0.00788227 37.3001 8.99616 50.0116 50 50H5.50871e-06V0Z" fill="currentColor" />
+            </svg>
+            <SkipToContent />
+            <PageBackdrop />
+            <Nav />
+            {children}
+          </Providers>
+        </body>
+      </html>
+    </ViewTransitions>
   );
 }

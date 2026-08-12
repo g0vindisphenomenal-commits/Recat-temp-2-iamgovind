@@ -1,7 +1,13 @@
 "use client";
 
 import { AnimatePresence, motion } from "motion/react";
-import { Mail, MessageCircle, Phone, X, ArrowUpRight } from "lucide-react";
+import {
+  IconMail,
+  IconBrandWhatsapp,
+  IconPhone,
+  IconX,
+  IconArrowUpRight,
+} from "@tabler/icons-react";
 import { useState } from "react";
 import type { ReactNode } from "react";
 
@@ -24,7 +30,7 @@ export function ContactButton(): ReactNode {
         className="focus-ring relative inline-flex h-11 cursor-pointer items-center justify-center bg-foreground px-5 text-sm font-semibold text-background shadow-md transition-all hover:opacity-95"
       >
         <span className="inline-flex items-center gap-2 whitespace-nowrap">
-          <Mail className="h-4 w-4 shrink-0" aria-hidden="true" />
+          <IconMail className="h-4 w-4 shrink-0" aria-hidden="true" />
           <span>Contact</span>
         </span>
       </motion.button>
@@ -64,7 +70,7 @@ export function ContactButton(): ReactNode {
                   className="rounded-full p-2 text-foreground/50 hover:bg-foreground/5 hover:text-foreground transition-colors cursor-pointer"
                   aria-label="Close dialog"
                 >
-                  <X className="h-4 w-4" />
+                  <IconX className="h-4 w-4" />
                 </button>
               </div>
 
@@ -78,12 +84,12 @@ export function ContactButton(): ReactNode {
                   className="group relative flex items-center gap-4 rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-3.5 transition-all duration-300 hover:bg-emerald-500/10 hover:border-emerald-500/40 hover:shadow-md"
                 >
                   <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-emerald-500 text-white shadow-sm transition-transform duration-300 group-hover:scale-105">
-                    <MessageCircle className="h-5 w-5" />
+                    <IconBrandWhatsapp className="h-5 w-5" />
                   </span>
                   <div className="flex flex-col min-w-0 flex-1">
                     <span className="text-sm font-semibold text-foreground flex items-center gap-1">
                       WhatsApp Chat
-                      <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                      <IconArrowUpRight className="h-3.5 w-3.5 text-muted-foreground group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                     </span>
                     <span className="text-xs text-muted-foreground truncate">
                       +91 {PHONE_NUMBER}
@@ -98,12 +104,12 @@ export function ContactButton(): ReactNode {
                   className="group relative flex items-center gap-4 rounded-2xl border border-blue-500/20 bg-blue-500/5 p-3.5 transition-all duration-300 hover:bg-blue-500/10 hover:border-blue-500/40 hover:shadow-md"
                 >
                   <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-blue-600 text-white shadow-sm transition-transform duration-300 group-hover:scale-105">
-                    <Phone className="h-5 w-5" />
+                    <IconPhone className="h-5 w-5" />
                   </span>
                   <div className="flex flex-col min-w-0 flex-1">
                     <span className="text-sm font-semibold text-foreground flex items-center gap-1">
                       Dialer
-                      <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                      <IconArrowUpRight className="h-3.5 w-3.5 text-muted-foreground group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                     </span>
                     <span className="text-xs text-muted-foreground truncate">
                       +91 {PHONE_NUMBER}
