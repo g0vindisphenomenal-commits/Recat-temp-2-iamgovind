@@ -1,6 +1,6 @@
 "use client";
 
-import { RotateCcw, Code } from "lucide-react";
+import { RotateCcw } from "lucide-react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
 type Chip = {
@@ -79,21 +79,6 @@ export function MarqueeStack(): ReactNode {
   const chipRefs = useRef<Array<HTMLDivElement | null>>([]);
   const [filterMode, setFilterMode] = useState<"all" | "dev" | "ads">("all");
   const isHoveredRef = useRef(false);
-  const [sodiumActive, setSodiumActive] = useState(false);
-  const [isSweeping, setIsSweeping] = useState(false);
-
-  const handleToggleSodiumLight = (): void => {
-    if (!sodiumActive) {
-      setSodiumActive(true);
-      setIsSweeping(true);
-      setTimeout(() => {
-        setIsSweeping(false);
-      }, 1800);
-    } else {
-      setSodiumActive(false);
-      setIsSweeping(false);
-    }
-  };
 
   // Filter CHIPS array based on active mode
   const filteredChips = CHIPS.filter((chip) => {
@@ -395,24 +380,6 @@ export function MarqueeStack(): ReactNode {
           isHoveredRef.current = false;
         }}
       >
-        {/* Toggle Sodium Light */}
-        <button
-          type="button"
-          onClick={handleToggleSodiumLight}
-          aria-label="Toggle sodium light effect"
-          className={`focus-ring absolute top-2 z-20 inline-flex h-7 w-7 items-center justify-center rounded-lg border transition-all duration-300 right-10 ${
-            sodiumActive
-              ? "border-amber-500/50 bg-amber-500/10 text-amber-500 shadow-[0_0_10px_rgba(245,158,11,0.2)]"
-              : "border-foreground/8 bg-background text-foreground/70 hover:text-foreground"
-          }`}
-        >
-          <Code
-            className="h-3.5 w-3.5"
-            strokeWidth={2.25}
-            aria-hidden="true"
-          />
-        </button>
-
         <button
           type="button"
           onClick={handleToggleMode}
@@ -425,26 +392,6 @@ export function MarqueeStack(): ReactNode {
             aria-hidden="true"
           />
         </button>
-
-        {/* Sodium Vapour Light Sweep & Ambient Glow */}
-        <div
-          className={`pointer-events-none absolute inset-0 z-0 transition-opacity duration-1000 ${
-            sodiumActive ? "opacity-100" : "opacity-0"
-          }`}
-          style={{
-            background: "radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.15), rgba(217, 119, 6, 0.05) 75%, transparent 100%)",
-            mixBlendMode: "screen",
-            animation: sodiumActive ? "sodium-flicker 0.6s ease-out, sodium-glow-hum 4s ease-in-out infinite alternate" : undefined,
-          }}
-        />
-        {isSweeping && (
-          <div
-            className="pointer-events-none absolute inset-y-0 w-[40%] z-10 bg-gradient-to-r from-transparent via-amber-500/40 to-transparent blur-3xl mix-blend-screen"
-            style={{
-              animation: "sodium-sweep 1.8s cubic-bezier(0.25, 1, 0.5, 1) forwards",
-            }}
-          />
-        )}
 
         {/* Gradient overlays for fading edges */}
         <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-background to-transparent" />
@@ -470,22 +417,6 @@ export function MarqueeStack(): ReactNode {
           ))}
         </div>
       </div>
-      <style dangerouslySetInnerHTML={{ __html: `
-        @keyframes sodium-sweep {
-          0% { left: -50%; }
-          100% { left: 150%; }
-        }
-        @keyframes sodium-flicker {
-          0%, 20%, 40%, 60% { opacity: 0; }
-          10%, 30%, 50% { opacity: 0.4; }
-          70%, 90% { opacity: 0.8; }
-          100% { opacity: 1; }
-        }
-        @keyframes sodium-glow-hum {
-          0% { filter: brightness(0.95); }
-          100% { filter: brightness(1.05); }
-        }
-      `}} />
     </div>
   );
 }
