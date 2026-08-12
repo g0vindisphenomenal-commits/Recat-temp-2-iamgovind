@@ -3,57 +3,20 @@
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import { useRef, useSyncExternalStore, type ReactNode } from "react";
 
+import { DottedPattern } from "@/components/ui/dotted-pattern";
+
 type Polaroid = {
   id: string;
   rotate: number;
-  src: string;
-  caption: string;
-  aspectClass: string;
 };
 
 const PHOTOS: Polaroid[] = [
-  {
-    id: "a",
-    rotate: -6,
-    src: "/team-photo-1.jpg",
-    caption: "Think Hub Academy Team",
-    aspectClass: "aspect-[16/10] w-[clamp(8.5rem,15vw,13rem)]",
-  },
-  {
-    id: "b",
-    rotate: 5,
-    src: "/team-photo-2.jpg",
-    caption: "Team Outing & Collaborators",
-    aspectClass: "aspect-[16/10] w-[clamp(8.5rem,15vw,13rem)]",
-  },
-  {
-    id: "c",
-    rotate: -3,
-    src: "/team-photo-3.jpg",
-    caption: "Govind & Growth Team",
-    aspectClass: "aspect-[16/10] w-[clamp(8.5rem,15vw,13rem)]",
-  },
-  {
-    id: "d",
-    rotate: 6,
-    src: "/govind.jpg",
-    caption: "Govind Portrait",
-    aspectClass: "aspect-[3/4] w-[clamp(6.5rem,11vw,9.5rem)]",
-  },
-  {
-    id: "e",
-    rotate: -5,
-    src: "/cybertruckfilms-actual.png",
-    caption: "CyberTruck Films",
-    aspectClass: "aspect-[16/10] w-[clamp(8rem,14vw,12rem)]",
-  },
-  {
-    id: "f",
-    rotate: 4,
-    src: "/marhabahospitality.png",
-    caption: "Marhaba Hospitality",
-    aspectClass: "aspect-[16/10] w-[clamp(8rem,14vw,12rem)]",
-  },
+  { id: "a", rotate: -8 },
+  { id: "b", rotate: 6 },
+  { id: "c", rotate: -4 },
+  { id: "d", rotate: 7 },
+  { id: "e", rotate: -6 },
+  { id: "f", rotate: 5 },
 ];
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -109,16 +72,9 @@ function PolaroidCard({
         y: ty,
         rotate: photo.rotate,
       }}
-      className={`group relative ${photo.aspectClass} shrink-0 overflow-hidden rounded-2xl bg-white p-2 border border-black/10 shadow-lg transition-all duration-300 hover:z-20 hover:scale-105 hover:shadow-2xl dark:bg-neutral-900 dark:border-white/10`}
+      className="relative aspect-[3/4] w-[clamp(6rem,11vw,9rem)] shrink-0 overflow-hidden rounded-2xl border-6 border-neutral-300/40 bg-white p-1.5 dark:border-white/15 dark:bg-neutral-900"
     >
-      <div className="relative h-full w-full overflow-hidden rounded-xl bg-neutral-100 dark:bg-neutral-800">
-        <img
-          src={photo.src}
-          alt={photo.caption}
-          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-          draggable={false}
-        />
-      </div>
+      <DottedPattern className="relative h-full w-full overflow-hidden rounded-xl" />
     </motion.div>
   );
 }
@@ -135,7 +91,7 @@ export function PolaroidStrip(): ReactNode {
   }
 
   return (
-    <div className="flex flex-wrap w-full items-center justify-center gap-2.5 px-4 sm:gap-3 sm:px-8">
+    <div className="flex flex-wrap w-full items-start justify-center gap-1 px-4 sm:gap-1.5 sm:px-8">
       {PHOTOS.map((photo, i) => (
         <PolaroidCard key={photo.id} photo={photo} index={i} />
       ))}
