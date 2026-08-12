@@ -199,7 +199,7 @@ const ToolsMarquee = ({ paused = false }: { paused?: boolean }) => {
     <div className="relative overflow-hidden">
       <div className="fade-mask-left transition-all duration-400" />
       <div className="fade-mask-right transition-all duration-400" />
-      <Marquee pauseOnHover paused={paused} className="[--duration:20s]">
+      <Marquee pauseOnHover paused={paused} repeat={4} className="[--duration:25s] [--gap:1.5rem]">
         <div className="flex items-center gap-6">
           {processedToolsData.map(({ name, icon }) => (
             <Tool key={name} name={name} icon={icon} />
