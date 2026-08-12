@@ -1,15 +1,18 @@
 "use client";
 
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
-import { useRef, useSyncExternalStore, type ReactNode } from "react";
+import { useEffect, useRef, useSyncExternalStore, useState, type ReactNode } from "react";
 
 import { DottedPattern } from "@/components/ui/dotted-pattern";
+import { ScratchToReveal } from "@/components/magicui/scratch-to-reveal";
+import { dashboardData } from "@/components/dashboard/dashboard-data";
 
 type Polaroid = {
   id: string;
   rotate: number;
   image?: string;
   video?: string;
+  scratch?: boolean;
 };
 
 const PHOTOS: Polaroid[] = [
@@ -17,11 +20,68 @@ const PHOTOS: Polaroid[] = [
   { id: "b", rotate: 6, image: "/polaroid-pixel.jpg" },
   { id: "c", rotate: -4, image: "/polaroid-dark.jpg" },
   { id: "d", rotate: 7, video: "/polaroid-video.3gp" },
-  { id: "e", rotate: -6 },
+  { id: "e", rotate: -6, scratch: true },
   { id: "f", rotate: 5 },
 ];
 
 const EASE = [0.22, 1, 0.36, 1] as const;
+
+function ScratchPolaroidCard(): ReactNode {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const [dimensions, setDimensions] = useState({ width: 140, height: 180 });
+  const [randomGif, setRandomGif] = useState<string>("");
+
+  useEffect(() => {
+    const gifs = dashboardData.scratchGifs;
+    if (gifs && gifs.length > 0) {
+      const selected = gifs[Math.floor(Math.random() * gifs.length)];
+      if (selected) {
+        setRandomGif(selected);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const updateSize = () => {
+      if (containerRef.current) {
+        setDimensions({
+          width: containerRef.current.clientWidth || 140,
+          height: containerRef.current.clientHeight || 180,
+        });
+      }
+    };
+    updateSize();
+    const ro = new ResizeObserver(updateSize);
+    ro.observe(containerRef.current);
+    return () => ro.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={containerRef}
+      className="relative h-full w-full overflow-hidden rounded-xl bg-neutral-950 flex items-center justify-center"
+    >
+      {randomGif ? (
+        <ScratchToReveal
+          width={dimensions.width}
+          height={dimensions.height}
+          minScratchPercentage={40}
+          className="relative h-full w-full flex items-center justify-center overflow-hidden rounded-xl"
+          gradientColors={["#A97CF8", "#F38CB8", "#FDCC92"]}
+        >
+          <div className="relative h-full w-full flex items-center justify-center p-2 bg-neutral-900">
+            <img
+              src={randomGif}
+              alt="Scratch reveal sticker"
+              className="h-full w-full object-contain pointer-events-none"
+            />
+          </div>
+        </ScratchToReveal>
+      ) : null}
+    </div>
+  );
+}
 
 function PolaroidCard({
   photo,
@@ -76,7 +136,9 @@ function PolaroidCard({
       }}
       className="relative aspect-[3/4] w-[clamp(6rem,11vw,9rem)] shrink-0 overflow-hidden rounded-2xl border-6 border-neutral-300/40 bg-white p-1.5 dark:border-white/15 dark:bg-neutral-900"
     >
-      {photo.video ? (
+      {photo.scratch ? (
+        <ScratchPolaroidCard />
+      ) : photo.video ? (
         <video
           autoPlay
           loop
