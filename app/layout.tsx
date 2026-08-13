@@ -104,7 +104,14 @@ export default function RootLayout({
         </head>
         <body
           className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} ${pacifico.variable} min-h-screen bg-background font-sans text-foreground antialiased`}
-        >
+          ><noscript>
+  <iframe
+    src="https://www.googletagmanager.com/ns.html?id=GTM-WRMJWFZ6"
+    height="0"
+    width="0"
+    style={{ display: "none", visibility: "hidden" }}
+  />
+</noscript>
           <Providers>
             <div className="site-frame site-frame--top" aria-hidden="true" />
             <div className="site-frame site-frame--left" aria-hidden="true" />
