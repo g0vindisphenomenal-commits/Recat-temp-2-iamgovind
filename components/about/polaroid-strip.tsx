@@ -20,7 +20,7 @@ const PHOTOS: Polaroid[] = [
   { id: "a", rotate: -8, image: "/polaroid-govind.jpg" },
   { id: "b", rotate: 6, image: "/polaroid-pixel.jpg" },
   { id: "c", rotate: -4, image: "/polaroid-dark.jpg" },
-  { id: "d", rotate: 7, video: "/polaroid-video.3gp" },
+  { id: "d", rotate: 7, video: "/polaroid-video.mp4" },
   { id: "e", rotate: -6, scratch: true },
   { id: "f", rotate: 5, location: true },
 ];
@@ -239,9 +239,9 @@ function PolaroidCard({
           loop
           muted
           playsInline
+          preload="auto"
           className="relative h-full w-full overflow-hidden rounded-xl object-cover"
         >
-          <source src={photo.video} type="video/3gpp" />
           <source src={photo.video} type="video/mp4" />
         </video>
       ) : photo.image ? (
