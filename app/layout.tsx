@@ -91,6 +91,17 @@ export default function RootLayout({
     <ViewTransitions>
       <html lang="en" suppressHydrationWarning>
         <head>
+          {/* Google Tag Manager */}
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+              })(window,document,'script','dataLayer','GTM-WRMJWFZ6');`,
+            }}
+          />
+          {/* End Google Tag Manager */}
           <link
             rel="alternate"
             type="application/rss+xml"
@@ -104,29 +115,32 @@ export default function RootLayout({
         </head>
         <body
           className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} ${pacifico.variable} min-h-screen bg-background font-sans text-foreground antialiased`}
-          ><noscript>
-  <iframe
-    src="https://www.googletagmanager.com/ns.html?id=GTM-WRMJWFZ6"
-    height="0"
-    width="0"
-    style={{ display: "none", visibility: "hidden" }}
-  />
-</noscript>
+        >
+          {/* Google Tag Manager (noscript) */}
+          <noscript>
+            <iframe
+              src="https://www.googletagmanager.com/ns.html?id=GTM-WRMJWFZ6"
+              height="0"
+              width="0"
+              style={{ display: "none", visibility: "hidden" }}
+            />
+          </noscript>
+          {/* End Google Tag Manager (noscript) */}
           <Providers>
-            <div className="site-frame site-frame--top" aria-hidden="true" />
-            <div className="site-frame site-frame--left" aria-hidden="true" />
-            <div className="site-frame site-frame--right" aria-hidden="true" />
-            <svg className="site-corner site-corner--top-left" width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M5.50871e-06 0C-0.00788227 37.3001 8.99616 50.0116 50 50H5.50871e-06V0Z" fill="currentColor" />
-            </svg>
-            <svg className="site-corner site-corner--top-right" width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M5.50871e-06 0C-0.00788227 37.3001 8.99616 50.0116 50 50H5.50871e-06V0Z" fill="currentColor" />
-            </svg>
-            <SkipToContent />
-            <PageBackdrop />
-            <Nav />
-            {children}
-          </Providers>
+  <div className="site-frame site-frame--top" aria-hidden="true" />
+  <div className="site-frame site-frame--left" aria-hidden="true" />
+  <div className="site-frame site-frame--right" aria-hidden="true" />
+  <svg className="site-corner site-corner--top-left" width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M5.50871e-06 0C-0.00788227 37.3001 8.99616 50.0116 50 50H5.50871e-06V0Z" fill="currentColor" />
+  </svg>
+  <svg className="site-corner site-corner--top-right" width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M5.50871e-06 0C-0.00788227 37.3001 8.99616 50.0116 50 50H5.50871e-06V0Z" fill="currentColor" />
+  </svg>
+  <SkipToContent />
+  <PageBackdrop />
+  <Nav />
+  {children}
+</Providers>
         </body>
       </html>
     </ViewTransitions>

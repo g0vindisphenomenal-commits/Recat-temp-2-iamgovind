@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  IconArrowLeft,
   IconArrowUpRight,
   IconCheck,
   IconChevronDown,
@@ -80,17 +79,9 @@ export function BlogPosts(): ReactNode {
 
   return (
     <div className="w-full">
-      {/* Top Header Row with Back Link & Filter Toggle */}
+      {/* Top Header Row with Filter Toggle */}
       <FadeIn delay={0.005}>
-        <div className="flex items-center justify-between gap-4 mb-8">
-          <TransitionLink
-            href="/"
-            className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
-          >
-            <IconArrowLeft className="h-4 w-4" />
-            Back home
-          </TransitionLink>
-
+        <div className="flex items-center justify-end gap-4 mb-8">
           {/* Right-aligned Top Filter Toggle & Popover */}
           <div className="relative" ref={filterRef}>
             <button
@@ -258,16 +249,13 @@ export function BlogPosts(): ReactNode {
         </div>
 
         {/* Heading Section */}
-        <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-3 text-foreground">
+        <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-8 text-foreground">
           Recent{" "}
           <span className="font-script font-normal text-[1.05em] leading-none align-baseline text-foreground">
             writing
           </span>
           .
         </h1>
-        <p className="text-muted-foreground text-lg mb-8">
-          Thoughts on software engineering, design, and things I find interesting.
-        </p>
 
         {/* Active Filter Pills Bar */}
         {hasActiveFilters && (

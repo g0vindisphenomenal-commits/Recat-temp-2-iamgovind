@@ -140,6 +140,8 @@ body {
   z-index: 50;
   pointer-events: none;
   background-color: var(--frame);
+  opacity: 0.4;
+  backdrop-filter: blur(6px);
 }
 
 .site-frame--top {
@@ -149,18 +151,18 @@ body {
   height: 12px;
 }
 
-.site-frame--left {
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 12px;
+.site-frame {
+  position: fixed;
+  z-index: 50;
+  pointer-events: none;
+  background-color: var(--frame);
 }
 
-.site-frame--right {
-  top: 0;
-  bottom: 0;
-  right: 0;
-  width: 12px;
+.site-frame {
+  display: none !important;
+}
+.site-corner {
+  display: none !important;
 }
 
 .site-corner {
@@ -168,6 +170,7 @@ body {
   z-index: 51;
   pointer-events: none;
   color: var(--frame);
+  opacity: 0.4;
 }
 
 .site-corner--top-left {

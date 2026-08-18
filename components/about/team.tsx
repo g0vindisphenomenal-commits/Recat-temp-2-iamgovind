@@ -33,8 +33,8 @@ const MEMBERS: Member[] = [
   },
   {
     name: "Sooraj Paranthaman",
-    role: "Collaborator & Specialist",
-    href: "http://soorajparanthaman.com/",
+    role: "Ecommerce Developer",
+    href: "https://www.linkedin.com/in/soorajparanthaman-digital-marketing-expert-in-kerala-trivandrum/",
     initials: "S",
     color: "#16A34A",
     avatarUrl: "/sooraj.png",

@@ -41,8 +41,8 @@ const PROJECTS: Project[] = [
     description:
       "Designed and developed a premium hospitality supplying website based in Dubai, operating similarly to an e-commerce platform. Built with an Angular frontend and a Python backend, the platform enables commercial clients to browse extensive hospitality catalog categories and seamlessly request custom bulk order quotations.",
     meta: "Full Stack Developer (Angular & Python), 2026",
-    imageRatio: 1024 / 768,
-    image: "/marhabahospitality.png",
+    imageRatio: 1754 / 1080,
+    image: "/marhabahospitality.mp4",
     imageAlt: "Marhaba Hospitality supplying website mockup",
     href: "https://marhabahospitality.com/",
   },
@@ -109,20 +109,16 @@ export function Projects({
   withHeadline = false,
   viewMoreVisible = false,
 }: ProjectsProps): ReactNode {
-  const items = viewMoreVisible ? PROJECTS.slice(0, 4) : PROJECTS;
+  const items = viewMoreVisible ? PROJECTS.slice(0, 2) : PROJECTS;
 
   return (
     <section className="relative w-full">
       <div className="mx-auto w-full max-w-275 px-6 sm:px-10">
         {withHeadline ? (
-          <FadeIn className="flex flex-col items-center gap-5 pt-12 pb-10 text-center sm:pt-20 sm:pb-14">
+          <FadeIn className="flex flex-col items-center gap-5 pt-12 pb-8 text-center sm:pt-16 sm:pb-10">
             <h2 className="font-serif text-[2.5rem] font-medium leading-[1.05] tracking-tight text-foreground md:text-[3rem] lg:text-[3.5rem]">
-              My projects
+              Projects
             </h2>
-            <p className="max-w-full text-[18px] leading-[1.45] tracking-tight text-foreground/65 sm:text-[20px]">
-              From playful experiments to thoughtful systems, a look at the
-              work I&rsquo;m proud to have shipped.
-            </p>
           </FadeIn>
         ) : null}
 
@@ -159,6 +155,7 @@ function ProjectCard({
   index: number;
 }): ReactNode {
   const Icon = project.icon;
+  const isVideo = project.image.endsWith(".mp4");
 
   return (
     <FadeIn
@@ -193,15 +190,26 @@ function ProjectCard({
           className="project-card__image ring-foreground/5 relative w-full overflow-hidden rounded-2xl bg-foreground/5 ring-1"
           style={{ aspectRatio: project.imageRatio }}
         >
-          <div className="project-card__image-inner">
-            <Image
-              src={project.image}
-              alt={project.imageAlt}
-              fill
-              sizes="(min-width: 1024px) 540px, (min-width: 768px) 45vw, 100vw"
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
-              priority={index < 2}
-            />
+          <div className="project-card__image-inner relative h-full w-full">
+            {isVideo ? (
+              <video
+                src={project.image}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            ) : (
+              <Image
+                src={project.image}
+                alt={project.imageAlt}
+                fill
+                sizes="(min-width: 1024px) 540px, (min-width: 768px) 45vw, 100vw"
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                priority={index < 2}
+              />
+            )}
           </div>
         </div>
 
