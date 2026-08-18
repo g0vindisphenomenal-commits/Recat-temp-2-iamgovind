@@ -235,15 +235,14 @@ function PolaroidCard({
         <ScratchPolaroidCard />
       ) : photo.video ? (
         <video
+          src={photo.video}
           autoPlay
           loop
           muted
           playsInline
           preload="auto"
           className="relative h-full w-full overflow-hidden rounded-xl object-cover"
-        >
-          <source src={photo.video} type="video/mp4" />
-        </video>
+        />
       ) : photo.image ? (
         <img
           src={photo.image}
