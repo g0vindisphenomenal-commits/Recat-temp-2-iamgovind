@@ -42,7 +42,7 @@ const PROJECTS: Project[] = [
       "Designed and developed a premium hospitality supplying website based in Dubai, operating similarly to an e-commerce platform. Built with an Angular frontend and a Python backend, the platform enables commercial clients to browse extensive hospitality catalog categories and seamlessly request custom bulk order quotations.",
     meta: "Full Stack Developer (Angular & Python), 2026",
     imageRatio: 1754 / 1080,
-    image: "/marhabahospitality.mp4",
+    image: "/projects/marhabahospitality.mp4",
     imageAlt: "Marhaba Hospitality supplying website mockup",
     href: "https://marhabahospitality.com/",
   },
@@ -55,7 +55,7 @@ const PROJECTS: Project[] = [
       "Designed and developed a robust e-commerce platform for Reshmi Happy Home, an electronics and home appliances store. Built with WordPress and WooCommerce, the site features a custom bottom mobile navigation panel, a dedicated client dashboard, advanced off-canvas product filters, and optimized checkout pipelines for streamlined shopping.",
     meta: "Full Stack Developer (WordPress & WooCommerce), 2026",
     imageRatio: 1024 / 768,
-    image: "/reshmihappyhome-actual.png",
+    image: "/projects/reshmihappyhome-actual.png",
     imageAlt: "Reshmi Happy Home e-commerce website mockup",
     href: "https://reshmihappyhome.com/",
   },
@@ -68,7 +68,7 @@ const PROJECTS: Project[] = [
       "Designed and developed the official website for Cybertruck Films, a professional video production company specializing in cinematic ads, brand films, photoshoots, and digital content creation. Built on WordPress, the site features a sleek, dark-themed user interface, integrated video showreels, and portfolio grids showcasing their creative projects.",
     meta: "Designer & Developer (WordPress), 2026",
     imageRatio: 1024 / 768,
-    image: "/cybertruckfilms-actual.png",
+    image: "/projects/cybertruckfilms-actual.png",
     imageAlt: "Cybertruck Films website mockup",
     href: "https://cybertruckfilms.com/",
   },
@@ -81,7 +81,7 @@ const PROJECTS: Project[] = [
       "Designed and developed a modern, high-performance website for a premier technical institute in Kochi specializing in advanced hardware and PC engineering. Built on Angular, the site features a dark high-tech aesthetic, interactive course catalogs, labs overview, and enrollment pipelines designed to showcase their hands-on, practical-first training philosophy.",
     meta: "Frontend Developer (Angular), 2026",
     imageRatio: 1024 / 640,
-    image: "/microbotit.png",
+    image: "/projects/microbotit.png",
     imageAlt: "Microbot Institute of Technology website mockup",
     href: "https://microbotit.com/",
   },
@@ -94,7 +94,7 @@ const PROJECTS: Project[] = [
       "Designed and developed a professional portfolio website for a digital marketer and social media influencer based in Thrissur. The project focused on creating a clean, modern layout that effectively showcases services, influencer brand deals, expertise, and content creation. Emphasis was placed on user experience, responsive design, and clear call-to-actions to support personal branding and audience engagement.",
     meta: "Designer & Developer, 2026",
     imageRatio: 1024 / 768,
-    image: "/rijasrazak-actual.png",
+    image: "/projects/rijasrazak-actual.png",
     imageAlt: "Rijasrazak.com website mockup",
     href: "https://rijasrazak.com/",
   },
@@ -194,7 +194,7 @@ function ProjectCard({
             {isVideo ? (
               <video
                 src={project.image}
-                poster="/marhabahospitality.png"
+                poster="/projects/marhabahospitality.png"
                 autoPlay
                 muted
                 loop

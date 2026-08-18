@@ -56,7 +56,7 @@ const jsonLdData = {
       name: "Govind B",
       jobTitle: "Digital Marketer & Full-Stack Web Developer",
       url: siteConfig.url,
-      image: `${siteConfig.url}/rahul.png`,
+      image: `${siteConfig.url}/about/rahul.png`,
       address: {
         "@type": "PostalAddress",
         addressLocality: "Trivandrum",

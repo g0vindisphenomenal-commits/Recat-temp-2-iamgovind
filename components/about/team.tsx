@@ -21,7 +21,7 @@ const MEMBERS: Member[] = [
     href: "https://portfolio-rahul-29.web.app/",
     initials: "R",
     color: "#2563EB",
-    avatarUrl: "/rahul.png",
+    avatarUrl: "/about/rahul.png",
   },
   {
     name: "Sathya Narayanan",
@@ -29,7 +29,7 @@ const MEMBERS: Member[] = [
     href: "https://sathyanarayanan.co/",
     initials: "S",
     color: "#EA580C",
-    avatarUrl: "/sathya.png",
+    avatarUrl: "/about/sathya.png",
   },
   {
     name: "Sooraj Paranthaman",
@@ -37,7 +37,7 @@ const MEMBERS: Member[] = [
     href: "https://www.linkedin.com/in/soorajparanthaman-digital-marketing-expert-in-kerala-trivandrum/",
     initials: "S",
     color: "#16A34A",
-    avatarUrl: "/sooraj.png",
+    avatarUrl: "/about/sooraj.png",
   },
   {
     name: "Akhil Sutheesh",
@@ -45,7 +45,7 @@ const MEMBERS: Member[] = [
     href: "https://akhilsutheesh.com/",
     initials: "A",
     color: "#7C3AED",
-    avatarUrl: "/akhil.png",
+    avatarUrl: "/about/akhil.png",
   },
   {
     name: "Gurudharman",
@@ -53,7 +53,7 @@ const MEMBERS: Member[] = [
     href: "https://gurudharman.com/",
     initials: "G",
     color: "#059669",
-    avatarUrl: "/guru.png",
+    avatarUrl: "/about/guru.png",
   },
 ];
 
