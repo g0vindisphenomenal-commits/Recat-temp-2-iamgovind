@@ -78,17 +78,60 @@ export function Team(): ReactNode {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [expandedAvatar]);
 
+  const MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024; // 5 MB
+  const ALLOWED_EXTENSIONS = [".pdf", ".jpg", ".jpeg", ".png"];
+  const ALLOWED_MIME_TYPES = ["application/pdf", "image/jpeg", "image/jpg", "image/png"];
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setSelectedFile(e.target.files[0]);
-    } else {
+    setErrorMessage("");
+    const file = e.target.files?.[0];
+    if (!file) {
       setSelectedFile(null);
+      return;
     }
+
+    const fileExt = "." + file.name.split(".").pop()?.toLowerCase();
+    const isValidType =
+      ALLOWED_MIME_TYPES.includes(file.type.toLowerCase()) ||
+      ALLOWED_EXTENSIONS.includes(fileExt);
+
+    if (!isValidType) {
+      setErrorMessage("Only PDF, JPG, and PNG files are allowed.");
+      setSelectedFile(null);
+      e.target.value = "";
+      return;
+    }
+
+    if (file.size > MAX_FILE_SIZE_BYTES) {
+      setErrorMessage("File size must be 5 MB or less.");
+      setSelectedFile(null);
+      e.target.value = "";
+      return;
+    }
+
+    setSelectedFile(file);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim() || isSubmitting) return;
+
+    if (selectedFile) {
+      const fileExt = "." + selectedFile.name.split(".").pop()?.toLowerCase();
+      const isValidType =
+        ALLOWED_MIME_TYPES.includes(selectedFile.type.toLowerCase()) ||
+        ALLOWED_EXTENSIONS.includes(fileExt);
+
+      if (!isValidType) {
+        setErrorMessage("Only PDF, JPG, and PNG files are allowed.");
+        return;
+      }
+
+      if (selectedFile.size > MAX_FILE_SIZE_BYTES) {
+        setErrorMessage("File size must be 5 MB or less.");
+        return;
+      }
+    }
 
     setIsSubmitting(true);
     setErrorMessage("");
@@ -290,12 +333,14 @@ export function Team(): ReactNode {
                   <label className="flex-1 cursor-pointer bg-background hover:bg-foreground/5 border border-foreground/8 border-dashed rounded-2xl px-3 py-2 text-[12px] text-center text-foreground/55 transition-colors flex items-center justify-center gap-1.5 select-none truncate max-w-[200px] sm:max-w-none">
                     <Paperclip className="h-3.5 w-3.5 shrink-0" />
                     <span className="truncate">
-                      {selectedFile ? selectedFile.name : "Upload your work"}
+                      {selectedFile
+                        ? selectedFile.name
+                        : "Upload work (PDF, JPG, PNG ≤ 5MB)"}
                     </span>
                     <input
                       type="file"
                       className="hidden"
-                      accept=".pdf,.png,.jpg,.jpeg,.zip"
+                      accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png"
                       onChange={handleFileChange}
                     />
                   </label>

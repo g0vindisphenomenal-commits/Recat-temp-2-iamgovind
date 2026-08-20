@@ -2,6 +2,7 @@ import { ContactCard } from "@/components/contact/contact-card";
 import { Hero } from "@/components/hero/hero";
 import { Projects } from "@/components/projects/projects";
 import { HomeDashboardSection } from "@/components/dashboard/home-dashboard-section";
+import { ReviewSlider } from "@/components/reviews/review-slider";
 import { createMetadata } from "@/lib/metadata";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
@@ -26,6 +27,7 @@ export default function HomePage(): ReactNode {
         </section>
       </div>
       <Projects withHeadline viewMoreVisible />
+      <ReviewSlider />
       <ContactCard />
       <div className="h-12 sm:h-16" />
     </main>
