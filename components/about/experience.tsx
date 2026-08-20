@@ -63,8 +63,8 @@ export function Experience(): ReactNode {
         Experience
       </h3>
       <div
-        className={`border-foreground/5 bg-foreground/2 dark:bg-foreground/5 relative overflow-hidden rounded-4xl border p-2 sm:p-4 ${
-          hiddenCount > 0 && !open ? "pb-0" : ""
+        className={`border-foreground/5 bg-foreground/2 dark:bg-foreground/5 relative rounded-4xl border p-2 sm:p-4 ${
+          hiddenCount > 0 && !open ? "overflow-hidden pb-0" : "overflow-visible"
         }`}
       >
         <motion.div
@@ -74,10 +74,18 @@ export function Experience(): ReactNode {
             height: hiddenCount > 0 && !open ? collapsedHeight : "auto",
           }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          style={{ overflow: "hidden" }}
+          style={{ overflow: hiddenCount > 0 && !open ? "hidden" : "visible" }}
         >
           <ul className="flex flex-col gap-2">
             {ENTRIES.map((entry, index) => {
+              const handleCardClick = () => {
+                if (entry.logoUrl) {
+                  setExpandedLogo(
+                    expandedLogo === entry.company ? null : entry.company
+                  );
+                }
+              };
+
               return (
                 <BlurFade key={`${entry.company}-${entry.period}`} delay={0.05 * index} inView>
                   <motion.li
@@ -86,20 +94,18 @@ export function Experience(): ReactNode {
                     className="group relative list-none"
                   >
                     <div
-                      className="bg-background border-foreground/5 flex items-center gap-4 rounded-3xl border p-2 w-full transition-all duration-300 hover:bg-foreground/2 hover:border-foreground/12 hover:shadow-[0_8px_30px_rgb(0,0,0,0.03)]"
+                      onClick={handleCardClick}
+                      className="bg-background border-foreground/5 flex items-center gap-4 rounded-3xl border p-2 w-full transition-all duration-300 hover:bg-foreground/2 hover:border-foreground/12 hover:shadow-[0_8px_30px_rgb(0,0,0,0.03)] cursor-pointer"
                       style={{ minHeight: ROW_HEIGHT }}
                     >
                       {/* Logo / DP Button - Click or touch pops up enlarged view */}
                       <div className="relative">
                         <button
                           type="button"
-                          onClick={() =>
-                            entry.logoUrl
-                              ? setExpandedLogo(
-                                  expandedLogo === entry.company ? null : entry.company
-                                )
-                              : undefined
-                          }
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleCardClick();
+                          }}
                           className="ring-foreground/8 inline-flex h-12 w-12 shrink-0 items-center justify-center ring-1 dark:ring-white/10 overflow-hidden rounded-[14px] bg-transparent cursor-pointer transition-transform duration-300 hover:scale-105 relative select-none"
                           aria-label={`View ${entry.company} photo`}
                         >
@@ -133,6 +139,7 @@ export function Experience(): ReactNode {
                                 damping: 30,
                               }}
                               className="absolute left-0 bottom-full mb-2 z-50"
+                              onClick={(e) => e.stopPropagation()}
                             >
                               <div className="relative rounded-2xl border border-foreground/10 bg-background shadow-xl overflow-hidden">
                                 <img
@@ -185,6 +192,7 @@ export function Experience(): ReactNode {
                           href={entry.href}
                           target="_blank"
                           rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
                           className="ml-auto text-[13px] font-medium text-foreground/70 transition-colors hover:text-foreground border border-foreground/10 hover:bg-foreground/5 rounded-xl px-3 py-1.5 inline-flex items-center gap-1 cursor-pointer focus-ring"
                         >
                           Visit
