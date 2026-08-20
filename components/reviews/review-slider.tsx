@@ -9,6 +9,7 @@ import {
   CheckCircle2,
   ExternalLink,
   Star,
+  Hand,
 } from "lucide-react";
 import { FadeIn } from "@/components/ui/motion-primitives";
 
@@ -111,9 +112,24 @@ function StarRating({ rating = 5 }: { rating: number }) {
   );
 }
 
+const slideVariants = {
+  enter: (direction: number) => ({
+    x: direction > 0 ? 80 : -80,
+    opacity: 0,
+  }),
+  center: {
+    x: 0,
+    opacity: 1,
+  },
+  exit: (direction: number) => ({
+    x: direction < 0 ? 80 : -80,
+    opacity: 0,
+  }),
+};
+
 export function ReviewSlider() {
   const [reviews, setReviews] = useState<Review[]>([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [[currentIndex, direction], setSlideState] = useState<[number, number]>([0, 0]);
   const [isAutoplay, setIsAutoplay] = useState(true);
 
   useEffect(() => {
@@ -127,19 +143,41 @@ export function ReviewSlider() {
 
   const handleNext = useCallback(() => {
     if (reviews.length === 0) return;
-    setCurrentIndex((prev) => (prev + 1) % reviews.length);
+    setSlideState(([prevIndex]) => [(prevIndex + 1) % reviews.length, 1]);
   }, [reviews.length]);
 
   const handlePrev = useCallback(() => {
     if (reviews.length === 0) return;
-    setCurrentIndex((prev) => (prev - 1 + reviews.length) % reviews.length);
+    setSlideState(([prevIndex]) => [(prevIndex - 1 + reviews.length) % reviews.length, -1]);
   }, [reviews.length]);
+
+  const goToSlide = useCallback((targetIndex: number) => {
+    setSlideState(([prevIndex]) => [
+      targetIndex,
+      targetIndex > prevIndex ? 1 : -1,
+    ]);
+  }, []);
 
   useEffect(() => {
     if (!isAutoplay || reviews.length <= 1) return;
     const interval = setInterval(handleNext, 5000);
     return () => clearInterval(interval);
   }, [isAutoplay, handleNext, reviews.length]);
+
+  const SWIPE_THRESHOLD = 40;
+  const handleDragEnd = (
+    _: unknown,
+    info: { offset: { x: number }; velocity: { x: number } }
+  ) => {
+    const swipeOffset = info.offset.x;
+    const swipeVelocity = info.velocity.x;
+
+    if (swipeOffset < -SWIPE_THRESHOLD || swipeVelocity < -300) {
+      handleNext();
+    } else if (swipeOffset > SWIPE_THRESHOLD || swipeVelocity > 300) {
+      handlePrev();
+    }
+  };
 
   if (reviews.length === 0) return null;
 
@@ -171,15 +209,21 @@ export function ReviewSlider() {
           onMouseEnter={() => setIsAutoplay(false)}
           onMouseLeave={() => setIsAutoplay(true)}
         >
-          {/* Card Frame */}
+          {/* Card Frame - Touch & Mouse Drag / Swipe Enabled */}
           <div className="relative overflow-hidden rounded-3xl sm:rounded-4xl border border-foreground/8 bg-background p-6 sm:p-10 shadow-xs backdrop-blur-sm transition-all duration-300 hover:border-foreground/15">
             {/* Background Glows */}
             <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-blue-500/5 blur-3xl" />
             <div className="pointer-events-none absolute -bottom-16 -left-16 h-48 w-48 rounded-full bg-amber-500/5 blur-3xl" />
 
-            <div className="relative z-10 flex flex-col gap-6">
+            <motion.div
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.2}
+              onDragEnd={handleDragEnd}
+              className="relative z-10 flex flex-col gap-6 cursor-grab active:cursor-grabbing select-none"
+            >
               {/* Header inside Card */}
-              <div className="flex flex-wrap items-center justify-between gap-4 border-b border-foreground/6 pb-5">
+              <div className="flex flex-wrap items-center justify-between gap-4 border-b border-foreground/6 pb-5 pointer-events-none">
                 <div className="flex items-center gap-3.5">
                   {/* Avatar / Initials */}
                   <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-foreground/6 border border-foreground/10 text-foreground font-bold text-lg shadow-2xs">
@@ -220,19 +264,21 @@ export function ReviewSlider() {
                 </div>
               </div>
 
-              {/* Review Quote Body with Motion */}
-              <div className="min-h-[110px] sm:min-h-[100px] flex items-center">
-                <AnimatePresence mode="wait">
+              {/* Review Quote Body with Drag & Motion */}
+              <div className="min-h-[110px] sm:min-h-[100px] flex items-center overflow-hidden">
+                <AnimatePresence mode="wait" custom={direction}>
                   <motion.div
                     key={currentReview.id}
-                    initial={{ opacity: 0, y: 12 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -12 }}
-                    transition={{ duration: 0.25, ease: "easeOut" }}
+                    custom={direction}
+                    variants={slideVariants}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                    transition={{ duration: 0.3, ease: "easeOut" }}
                     className="w-full relative"
                   >
                     <Quote className="absolute -left-2 -top-3 h-8 w-8 text-foreground/5 rotate-180 pointer-events-none" />
-                    <p className="text-[16px] sm:text-[19px] leading-relaxed text-foreground/85 tracking-tight font-normal italic pl-2 sm:pl-4 border-l-2 border-amber-400/70">
+                    <p className="text-[16px] sm:text-[19px] leading-relaxed text-foreground/85 tracking-tight font-normal italic pl-2 sm:pl-4 border-l-2 border-amber-400/70 pointer-events-none">
                       &ldquo;{currentReview.text}&rdquo;
                     </p>
                   </motion.div>
@@ -241,20 +287,26 @@ export function ReviewSlider() {
 
               {/* Slider Footer & Controls */}
               <div className="flex items-center justify-between pt-2 border-t border-foreground/6">
-                {/* Dot Pagination */}
-                <div className="flex items-center gap-1.5">
-                  {reviews.map((_, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => setCurrentIndex(idx)}
-                      aria-label={`Go to slide ${idx + 1}`}
-                      className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                        idx === currentIndex
-                          ? "w-7 bg-foreground"
-                          : "w-2 bg-foreground/20 hover:bg-foreground/40"
-                      }`}
-                    />
-                  ))}
+                {/* Swipe helper tip & Dot Pagination */}
+                <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-1.5">
+                    {reviews.map((_, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => goToSlide(idx)}
+                        aria-label={`Go to slide ${idx + 1}`}
+                        className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                          idx === currentIndex
+                            ? "w-7 bg-foreground"
+                            : "w-2 bg-foreground/20 hover:bg-foreground/40"
+                        }`}
+                      />
+                    ))}
+                  </div>
+                  <span className="hidden sm:inline-flex items-center gap-1 text-[11px] text-foreground/40 select-none">
+                    <Hand className="h-3 w-3" />
+                    Swipe or drag
+                  </span>
                 </div>
 
                 {/* Nav Buttons */}
@@ -275,7 +327,7 @@ export function ReviewSlider() {
                   </button>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
 
           {/* Bottom Google Profile Trust Banner */}
